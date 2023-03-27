@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FVEDoc.Api.App", "FVED\FVEDoc.Api.App.csproj", "{C3EF3A7F-628F-454E-8309-10163D180881}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModels", "DataModels\DataModels.csproj", "{DEA0D618-3002-4881-83EF-3D6D2419AA07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FVEDoc.Api.DAL.Mock", "FVEDoc.DAL\FVEDoc.Api.DAL.Mock.csproj", "{483801FF-A383-4172-9CC5-9A5F1346F9E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FVEDoc.Api.BLL", "FVEDoc.BLL\FVEDoc.Api.BLL.csproj", "{1C0475E7-775C-4AB8-989D-9C0885DAA207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FVEDoc.Common.Models", "FVEDoc.Common.Models\FVEDoc.Common.Models.csproj", "{DD55B200-5C0F-4B69-8FB1-B1BE1A31F274}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FVEDoc.Common", "FVEDoc.Common\FVEDoc.Common.csproj", "{EC787E55-47D9-4221-BD1F-5E5285A413F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FVEDoc.Api.DAL.Common", "FVEDoc.DAL.Common\FVEDoc.Api.DAL.Common.csproj", "{4502B271-4A5E-4099-A90E-CFCF1071E49E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3EF3A7F-628F-454E-8309-10163D180881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3EF3A7F-628F-454E-8309-10163D180881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3EF3A7F-628F-454E-8309-10163D180881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3EF3A7F-628F-454E-8309-10163D180881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEA0D618-3002-4881-83EF-3D6D2419AA07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEA0D618-3002-4881-83EF-3D6D2419AA07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEA0D618-3002-4881-83EF-3D6D2419AA07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEA0D618-3002-4881-83EF-3D6D2419AA07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{483801FF-A383-4172-9CC5-9A5F1346F9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{483801FF-A383-4172-9CC5-9A5F1346F9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{483801FF-A383-4172-9CC5-9A5F1346F9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{483801FF-A383-4172-9CC5-9A5F1346F9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C0475E7-775C-4AB8-989D-9C0885DAA207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C0475E7-775C-4AB8-989D-9C0885DAA207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C0475E7-775C-4AB8-989D-9C0885DAA207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C0475E7-775C-4AB8-989D-9C0885DAA207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD55B200-5C0F-4B69-8FB1-B1BE1A31F274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD55B200-5C0F-4B69-8FB1-B1BE1A31F274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD55B200-5C0F-4B69-8FB1-B1BE1A31F274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD55B200-5C0F-4B69-8FB1-B1BE1A31F274}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC787E55-47D9-4221-BD1F-5E5285A413F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC787E55-47D9-4221-BD1F-5E5285A413F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC787E55-47D9-4221-BD1F-5E5285A413F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC787E55-47D9-4221-BD1F-5E5285A413F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4502B271-4A5E-4099-A90E-CFCF1071E49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4502B271-4A5E-4099-A90E-CFCF1071E49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4502B271-4A5E-4099-A90E-CFCF1071E49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4502B271-4A5E-4099-A90E-CFCF1071E49E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0AE73050-BCC8-49C7-911A-F270901C0FB0}
+	EndGlobalSection
+EndGlobal
