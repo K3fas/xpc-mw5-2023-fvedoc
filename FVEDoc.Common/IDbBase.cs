@@ -1,7 +1,5 @@
 ﻿namespace FVEDoc.DAL.Common;
-public interface IDbBase
+public interface IWithId
 {
     Guid Id { get; init; }
-    DateTimeOffset DateCreated { get; init; }
-    DateTimeOffset DateModified { get; init; }
 }

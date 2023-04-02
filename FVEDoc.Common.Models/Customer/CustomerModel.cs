@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.Customer;
-public class CustomerModel : DbBase
+public class CustomerModel : WithId
 {
     public required string Name { get; set; }
     public string? CompanyID { get; set; }

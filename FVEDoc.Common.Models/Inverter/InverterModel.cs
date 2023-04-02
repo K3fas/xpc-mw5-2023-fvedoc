@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.Inverter;
-public class InverterModel : DbBase
+public class InverterModel : WithId
 {
     public required string Name { get; set; }
     public required int SVT { get; set; }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.InstallationInfo;
-public class InstallationInfoModel : DbBase
+public class InstallationInfoModel : WithId
 {
     public required InstallationTypeModel InstallationType { get; set; }
     public required IList<int> PVStrings { get; set; }

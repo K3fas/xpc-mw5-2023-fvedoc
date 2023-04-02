@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.Order;
-public class OrderModel : DbBase
+public class OrderModel : WithId
 {
     public int OrderId { get; set; }
     public InstallationTypeModel InstallationType{ get; set; }
