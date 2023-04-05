@@ -11,4 +11,12 @@
     <Folder Include="Repositories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FVEDoc.DAL.Common\FVEDoc.Api.DAL.Common.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -9,7 +9,7 @@ namespace FVEDoc.Api.DAL.Common.Entities;
 public class InstallationTypeEntity : EntityBase
 {
     public required string PVTypeID { get; set; }
-    public required UnitType<double> Power { get; set; }
+    public required double Power { get; set; }
     public required InverterEntity Inverter { get; set; }
     public required PVPanelEntity PVPanel { get; set; }
     public required int PVPanelCount { get; set; }
