@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class PropertyInfoRepository : RepositoryBase<PropertyInfoEntity>
+public class PropertyInfoRepository : RepositoryBase<PropertyInfoEntity>, IPropertyInfoRepository
 {
-    public PropertyInfoRepository(Bogus bogus)
+    public PropertyInfoRepository(BogusSeeder bogus)
         :base(bogus.PropertyInfos)
     {
     }

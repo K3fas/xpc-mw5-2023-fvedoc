@@ -2,7 +2,7 @@
 using FVEDoc.Api.DAL.Common.Entities;
 
 namespace FVEDoc.Api.DAL.Mock;
-public class Bogus
+public class BogusSeeder
 {
     private readonly List<string> _places = new() { "Basement", "Hallway", "Technical room" };
     public IList<BatteryEntity> Batteries { get; } = new List<BatteryEntity>();
@@ -16,7 +16,7 @@ public class Bogus
     public IList<PropertyInfoEntity> PropertyInfos { get; } = new List<PropertyInfoEntity>();
     public IList<PVPanelEntity> PVPanels { get; } = new List<PVPanelEntity>();
 
-    public Bogus()
+    public BogusSeeder()
     {
         SeedBatteries();
         SeedCadastreData();
@@ -41,7 +41,12 @@ public class Bogus
             .RuleFor(x => x.ContinuousCharge, x => x.Random.Double(0, 10))
             .RuleFor(x => x.ContinuousDischarge, x => x.Random.Double(0, 10))
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
-            .RuleFor(x => x.DateModified, x => x.Date.Recent());
+            .RuleFor(x => x.DateModified, x => x.Date.Recent())
+            .RuleFor(x => x.LifeExpectacy, x => x.Random.Double(4000, 6000)+" cycles")
+            .RuleFor(x => x.Name, x => x.Name.FirstName())
+            .RuleFor(x => x.TotalCapacity, x => x.Random.Double(5, 15))
+            .RuleFor(x => x.Weigth, x => x.Random.Double(40, 80));
+
 
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)

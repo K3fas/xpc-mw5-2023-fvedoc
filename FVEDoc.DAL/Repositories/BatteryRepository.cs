@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class BatteryRepository : RepositoryBase<BatteryEntity>
+public class BatteryRepository : RepositoryBase<BatteryEntity>, IBatteryRepository
 {
-    public BatteryRepository(Bogus bogus)
+    public BatteryRepository(BogusSeeder bogus)
         :base(bogus.Batteries)
     {
     }

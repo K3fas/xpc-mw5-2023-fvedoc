@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class OrderRepository : RepositoryBase<OrderEntity>
+public class OrderRepository : RepositoryBase<OrderEntity>, IOrderRepository
 {
-    public OrderRepository(Bogus bogus)
+    public OrderRepository(BogusSeeder bogus)
         :base(bogus.Orders)
     {
     }

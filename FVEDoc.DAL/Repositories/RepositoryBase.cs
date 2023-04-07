@@ -12,7 +12,7 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : IEntity
 
     public RepositoryBase(IList<T> entities)
     {
-        _entities = entities
+        _entities = entities;
     }
     public void Delete(Guid id)
     {

@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class CarChargerRepository : RepositoryBase<CarChargerEntity>
+public class CarChargerRepository : RepositoryBase<CarChargerEntity>, ICarChargerRepository
 {
-    public CarChargerRepository(Bogus bogus)
+    public CarChargerRepository(BogusSeeder bogus)
         :base(bogus.CarChargers)
     {
     }

@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class PVPanelRepository : RepositoryBase<PVPanelEntity>
+public class PVPanelRepository : RepositoryBase<PVPanelEntity>, IPVPanelRepository
 {
-    public PVPanelRepository(Bogus bogus)
+    public PVPanelRepository(BogusSeeder bogus)
         :base(bogus.PVPanels)
     {
     }

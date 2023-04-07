@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class InverterRepository : RepositoryBase<InverterEntity>
+public class InverterRepository : RepositoryBase<InverterEntity>, IInverterRepository
 {
-    public InverterRepository(Bogus bogus)
+    public InverterRepository(BogusSeeder bogus)
         :base(bogus.Inverters)
     {
     }

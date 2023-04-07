@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class CustomerRepository : RepositoryBase<CustomerEntity>
+public class CustomerRepository : RepositoryBase<CustomerEntity>, ICustomerRepository
 {
-    public CustomerRepository(Bogus bogus)
+    public CustomerRepository(BogusSeeder bogus)
         :base(bogus.Customers)
     {
     }

@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class CadastreRepository : RepositoryBase<CadastreDataEntity>
+public class CadastreRepository : RepositoryBase<CadastreDataEntity>, ICadastreRepository
 {
-    public CadastreRepository(Bogus bogus)
+    public CadastreRepository(BogusSeeder bogus)
         :base(bogus.CadastreData)
     {
     }

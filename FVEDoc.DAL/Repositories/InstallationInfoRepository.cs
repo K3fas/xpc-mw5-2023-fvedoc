@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Mock.Repositories;
-public class InstallationInfoRepository : RepositoryBase<InstallationInfoEntity>
+public class InstallationInfoRepository : RepositoryBase<InstallationInfoEntity>, IInstallationInfoRepository
 {
-    public InstallationInfoRepository(Bogus bogus)
+    public InstallationInfoRepository(BogusSeeder bogus)
         :base(bogus.InstallationInfos)
     {
     }
