@@ -1,3 +1,4 @@
+using AutoMapper;
 using AutoMapper.Internal;
 using FVEDoc.Api.BLL.Installers;
 using FVEDoc.Api.DAL.Common.Entities;
@@ -19,6 +20,8 @@ ConfigureAutoMapper(builder.Services);
 ConfigureDependencies(builder.Services, builder.Configuration);
 
 var app = builder.Build();
+
+ValidateAutomapper(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -46,4 +49,18 @@ void ConfigureAutoMapper(IServiceCollection services)
 {
     //services.AddAutoMapper(cfg => { }, typeof(EntityBase), typeof(ApiBLLInstaller));
     services.AddAutoMapper(typeof(EntityBase), typeof(ApiBLLInstaller));
+}
+
+void ValidateAutomapper(IServiceProvider services)
+{
+    var mapper = services.GetRequiredService<IMapper>();
+    try
+    {
+        mapper.ConfigurationProvider.AssertConfigurationIsValid();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        throw;
+    }
 }

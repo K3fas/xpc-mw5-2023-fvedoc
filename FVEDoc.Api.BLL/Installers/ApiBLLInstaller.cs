@@ -14,7 +14,7 @@ public class ApiBLLInstaller : IInstaller
     {
         serviceCollection.Scan(sel =>
             sel.FromAssemblyOf<ApiBLLInstaller>()
-                .AddClasses(c => c.AssignableTo<IAppFacade>())
+                .AddClasses(c => c.AssignableTo<IApiFacade>())
                 .AsMatchingInterface()
                 .WithScopedLifetime());
     }
