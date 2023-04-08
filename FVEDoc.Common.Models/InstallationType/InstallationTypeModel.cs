@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.InstallationType;
-public class InstallationTypeModel : WithId
+public class InstallationTypeModel : ModelBase
 {
     public required PVTypeIdModel PVTypeID { get; set; }
     public required UnitType<double> Power { get; set; }

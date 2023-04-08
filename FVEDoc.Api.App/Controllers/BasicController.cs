@@ -10,7 +10,7 @@ namespace FVEDoc.Api.App.Controllers;
 
 public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicController<TModel>
     where TEntity : IEntity
-    where TModel : IWithId
+    where TModel : IModelBase
 {
     private readonly ILogger _logger;
     protected readonly IFacadeBase<TEntity, TModel> _facade;

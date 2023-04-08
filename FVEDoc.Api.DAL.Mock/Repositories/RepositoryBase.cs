@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Common.Repositories;
-public abstract class RepositoryBase<T> : IApiRepository<T> where T : IEntity
+public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEntity
 {
     private readonly IList<T> _entities;
 
@@ -25,11 +25,7 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : IEntity
 
     public bool Exists(Guid id)
     {
-        if(_entities.Select(x => x.Id).Contains(id))
-        {
-            return true;
-        }
-        return false;
+        return _entities.Select(x => x.Id).Contains(id);
     }
 
     public IList<T> GetAll()
@@ -39,7 +35,9 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : IEntity
 
     public T? GetById(Guid id)
     {
-        return _entities.FirstOrDefault(x => x.Id == id);
+        return Exists(id)
+            ? _entities.FirstOrDefault(x => x.Id == id)
+            : null;
     }
 
     public Guid Insert(T entity)

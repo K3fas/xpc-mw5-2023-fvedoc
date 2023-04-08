@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.PVPanel;
-public class PVPanelModel : WithId
+public class PVPanelModel : ModelBase
 {
     public required string Name { get; set; }
     public required int SVT { get; set; }

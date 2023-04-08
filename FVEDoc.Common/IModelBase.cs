@@ -1,5 +1,5 @@
 ﻿namespace FVEDoc.DAL.Common;
-public interface IWithId
+public interface IModelBase
 {
     Guid Id { get; init; }
 }

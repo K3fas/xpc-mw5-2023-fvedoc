@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common;
-public class WithId : IWithId
+public class ModelBase : IModelBase
 {
     public required Guid Id { get; init; }
 

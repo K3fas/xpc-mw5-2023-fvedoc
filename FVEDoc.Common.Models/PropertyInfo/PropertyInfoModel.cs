@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.PropertyInfo;
-public class PropertyInfoModel : WithId
+public class PropertyInfoModel : ModelBase
 {
     public CadastreDataModel? CadastreData { get; set; }
     public int? MainCB { get; set; }

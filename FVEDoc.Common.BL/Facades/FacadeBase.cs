@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FVEDoc.Common.BL.Facades;
 public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
     where TEntity : IEntity
-    where TModel : IWithId
+    where TModel : IModelBase
 {
     protected readonly IApiRepository<TEntity> _repository;
     protected readonly IMapper _mapper;
@@ -35,7 +35,7 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
     public Guid CreateOrUpdate(TModel model)
     {
         return _repository.Exists(model.Id)
-            ? Update(model)!.Value
+            ? Update(model)
             : Create(model);
     }
 
@@ -54,7 +54,7 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
         return _mapper.Map<TModel>(_repository.GetById(id));
     }
 
-    public Guid? Update(TModel model)
+    public Guid Update(TModel model)
     {
         var entity = _mapper.Map<TEntity>(model);
         entity.DateModified = DateTimeOffset.UtcNow;

@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace FVEDoc.Api.App.Controllers;
 
-public interface IBasicController<TModel> where TModel : IWithId
+public interface IBasicController<TModel> where TModel : IModelBase
 {
     [HttpGet]
     [Route("all")]

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.DAL.Common.Entities.Interfaces;
-public interface IEntity : IWithId
+public interface IEntity : IModelBase
 {
     DateTimeOffset DateCreated { get; set; }
     DateTimeOffset DateModified { get; set; }

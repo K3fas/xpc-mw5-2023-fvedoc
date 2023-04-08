@@ -25,6 +25,7 @@ public class BatteryControler :  BasicController<BatteryEntity, BatteryModel>
     [Route("list")]
     public IEnumerable<BatteryListModel> GetList()
     {
+        _logger.LogInformation("Getting battery model list");
         return _battery.GetListModels();
     }
 

@@ -8,14 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.BLL.MapperProfiles;
-public class BatteryMapperProfile : Profile
+public class BatteryMapperProfile : MapperBase<BatteryEntity, BatteryModel>
 {
     public BatteryMapperProfile()
     {
-        CreateMap<BatteryEntity, BatteryModel>();
         CreateMap<BatteryEntity, BatteryListModel>();
-
-        CreateMap<BatteryModel, BatteryEntity>();
     }
 }
 

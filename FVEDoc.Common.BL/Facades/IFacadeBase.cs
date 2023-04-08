@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace FVEDoc.Common.BL.Facades;
 public interface IFacadeBase<TEntity, TModel>
     where TEntity : IEntity
-    where TModel : IWithId
+    where TModel : IModelBase
 {
     List<TModel> GetAll();
     TModel? GetById(Guid id);
     Guid CreateOrUpdate(TModel model);
     Guid Create(TModel model);
-    Guid? Update(TModel model);
+    Guid Update(TModel model);
     void Delete(Guid id);
 }
 
