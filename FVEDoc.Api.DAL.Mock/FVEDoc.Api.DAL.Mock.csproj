@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FVEDoc.DAL.Common\FVEDoc.Api.DAL.Common.csproj" />
+    <ProjectReference Include="..\FVEDoc.Api.DAL.Common\FVEDoc.Api.DAL.Common.csproj" />
   </ItemGroup>
 
 </Project>

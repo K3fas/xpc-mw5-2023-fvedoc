@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FVEDoc.DAL\FVEDoc.Api.DAL.Mock.csproj" />
+    <ProjectReference Include="..\FVEDoc.Api.DAL.Mock\FVEDoc.Api.DAL.Mock.csproj" />
   </ItemGroup>
+
+
 
 </Project>
