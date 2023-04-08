@@ -39,7 +39,7 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : IEntity
 
     public T? GetById(Guid id)
     {
-        return _entities.First(x => x.Id == id);
+        return _entities.FirstOrDefault(x => x.Id == id);
     }
 
     public Guid Insert(T entity)

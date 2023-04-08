@@ -1,3 +1,6 @@
+using AutoMapper.Internal;
+using FVEDoc.Api.BLL.Installers;
+using FVEDoc.Api.DAL.Common.Entities;
 using FVEDoc.Api.DAL.Mock;
 using FVEDoc.Api.DAL.Mock.Installers;
 using FVEDoc.Common.Extensions;
@@ -11,7 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddSingleton<BogusSeeder>();
+
+ConfigureAutoMapper(builder.Services);
 ConfigureDependencies(builder.Services, builder.Configuration);
 
 var app = builder.Build();
@@ -34,5 +38,12 @@ app.Run();
 
 void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
 {
-    services.AddInstaller<DALMockInstaller>();
+    services.AddInstaller<ApiDALMockInstaller>();
+    services.AddInstaller<ApiBLLInstaller>();
+}
+
+void ConfigureAutoMapper(IServiceCollection services)
+{
+    //services.AddAutoMapper(cfg => { }, typeof(EntityBase), typeof(ApiBLLInstaller));
+    services.AddAutoMapper(typeof(EntityBase), typeof(ApiBLLInstaller));
 }

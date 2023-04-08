@@ -36,7 +36,7 @@ public class BogusSeeder
         var faker = new Faker<BatteryEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.BlockCapacity, x => x.Random.Double(0, 20))
-            .RuleFor(x => x.BlockCount, x => x.Random.Int())
+            .RuleFor(x => x.BlockCount, x => x.Random.Int(0,5))
             .RuleFor(x => x.BlockTechnology, x => x.Name.JobTitle())
             .RuleFor(x => x.ContinuousCharge, x => x.Random.Double(0, 10))
             .RuleFor(x => x.ContinuousDischarge, x => x.Random.Double(0, 10))
