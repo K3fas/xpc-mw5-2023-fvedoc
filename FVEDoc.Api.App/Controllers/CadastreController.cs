@@ -3,7 +3,7 @@ using FVEDoc.Common.Models.CadastreData;
 
 namespace FVEDoc.Api.App.Controllers;
 
-public class CadastreController : BasicController<CadastreDataEntity, CadastreDataModel>
+public class CadastreController
 {
 
 }
