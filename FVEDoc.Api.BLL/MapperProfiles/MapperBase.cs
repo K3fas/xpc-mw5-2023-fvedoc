@@ -15,7 +15,10 @@ public abstract class MapperBase<TEntity, TModel> : Profile , IMapperBase<TEntit
     public MapperBase()
     {
         CreateMap<TEntity, TModel>();
-        CreateMap<TModel, TEntity>();
+        CreateMap<TModel, TEntity>()
+            .ForMember(dest => dest.DateCreated, src => src.Ignore())
+            .ForMember(dest => dest.DateModified, src => src.Ignore());
+
     }
 }
 

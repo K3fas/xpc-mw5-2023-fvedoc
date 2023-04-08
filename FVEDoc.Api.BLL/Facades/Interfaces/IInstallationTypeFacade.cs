@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Api.BLL.Facades.Interfaces;
-public interface IInstalaltionTypeFacade : IFacadeBase<InstallationTypeEntity, InstallationTypeModel>, IApiFacade
+public interface IInstallationTypeFacade : IFacadeBase<InstallationTypeEntity, InstallationTypeModel>, IApiFacade
 {
 }
 

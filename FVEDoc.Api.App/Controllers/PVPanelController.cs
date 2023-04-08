@@ -1,5 +1,15 @@
-﻿namespace FVEDoc.Api.App.Controllers;
+﻿using FVEDoc.Api.BLL.Facades.Interfaces;
+using FVEDoc.Api.DAL.Common.Entities;
+using FVEDoc.Common.Models.PVPanel;
+using Microsoft.AspNetCore.Mvc;
 
-public class PVPanelController
+namespace FVEDoc.Api.App.Controllers;
+[ApiController]
+[Route("[controller]")]
+public class PVPanelController : BasicController<PVPanelEntity, PVPanelModel>
 {
+    public PVPanelController(ILogger<PVPanelController> logger, IPVPanelFacade facade)
+        : base(logger, facade)
+    {
+    }
 }
