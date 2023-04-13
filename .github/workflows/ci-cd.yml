@@ -1,7 +1,7 @@
 name: CI FVEDoc
 
 on:
-  push:
+  pull_request:
     branches:
       - master
 
