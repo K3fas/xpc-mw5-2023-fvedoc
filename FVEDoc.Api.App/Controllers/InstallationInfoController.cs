@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("installation-info")]
 public class InstallationInfoController : BasicController<InstallationInfoEntity, InstallationInfoModel>
 {
     public InstallationInfoController(ILogger<InstallationInfoController> logger, IInstallationInfoFacade facade)

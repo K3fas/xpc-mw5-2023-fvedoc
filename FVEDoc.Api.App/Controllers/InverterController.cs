@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("inverter")]
 public class InverterController : BasicController<InverterEntity, InverterModel>
 {
     public InverterController(ILogger<InverterController> logger, IInverterFacade facade)

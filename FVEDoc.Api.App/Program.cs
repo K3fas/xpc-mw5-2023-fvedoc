@@ -1,8 +1,6 @@
 using AutoMapper;
-using AutoMapper.Internal;
 using FVEDoc.Api.BLL.Installers;
 using FVEDoc.Api.DAL.Common.Entities;
-using FVEDoc.Api.DAL.Mock;
 using FVEDoc.Api.DAL.Mock.Installers;
 using FVEDoc.Common.Extensions;
 

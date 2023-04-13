@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("customer")]
 public class CustomerController : BasicController<CustomerEntity, CustomerModel>
 {
     public CustomerController(ILogger<CustomerController> logger, ICustomerFacade facade)

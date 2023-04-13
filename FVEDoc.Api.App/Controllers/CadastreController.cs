@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("cadastre")]
 public class CadastreController : BasicController<CadastreDataEntity, CadastreDataModel>
 {
     public CadastreController(ILogger<CadastreController> logger, ICadastreFacade facade)

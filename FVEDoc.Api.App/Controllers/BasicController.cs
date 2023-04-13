@@ -1,10 +1,7 @@
-﻿using FVEDoc.Api.BLL.Facades.Interfaces;
-using FVEDoc.Api.DAL.Common.Entities.Interfaces;
+﻿using FVEDoc.Api.DAL.Common.Entities.Interfaces;
 using FVEDoc.Common.BL.Facades;
 using FVEDoc.DAL.Common;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace FVEDoc.Api.App.Controllers;
 
@@ -22,15 +19,25 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpPost]
-    [Route("create")]
-    public Guid? Create(TModel model)
+    [Route("")]
+    public IActionResult Create(TModel model)
     {
         _logger.LogInformation("Creating entity {entity}", model.Id);
-        return _facade.Create(model);
+
+        try
+        {
+            return Ok(_facade.Create(model));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning("Failed to crate entity !");
+            _logger.LogWarning("{ex}", ex.Message);
+            return BadRequest();
+        }
     }
 
     [HttpDelete]
-    [Route("delete/{id?}")]
+    [Route("{id?}")]
     public void Delete(Guid id)
     {
         _logger.LogInformation("Deleting entity {entity}", id);
@@ -38,7 +45,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpGet]
-    [Route("all")]
+    [Route("")]
     public IEnumerable<TModel> GetAll()
     {
         _logger.LogInformation("Getting all models");
@@ -54,7 +61,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpPut]
-    [Route("update")]
+    [Route("")]
     public Guid? Update(TModel model)
     {
         _logger.LogInformation("Updating entity {entity}", model.Id);
