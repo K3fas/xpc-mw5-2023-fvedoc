@@ -1,10 +1,7 @@
-﻿using FVEDoc.Api.BLL.Facades.Interfaces;
-using FVEDoc.Api.DAL.Common.Entities.Interfaces;
+﻿using FVEDoc.Api.DAL.Common.Entities.Interfaces;
 using FVEDoc.Common.BL.Facades;
 using FVEDoc.DAL.Common;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace FVEDoc.Api.App.Controllers;
 

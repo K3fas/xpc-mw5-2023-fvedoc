@@ -2,11 +2,6 @@
 using FVEDoc.Common.Models.CarCharger;
 using FVEDoc.Common.Models.Inverter;
 using FVEDoc.Common.Models.PVPanel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FVEDoc.Common.Models.InstallationType;
 public class InstallationTypeModel : ModelBase

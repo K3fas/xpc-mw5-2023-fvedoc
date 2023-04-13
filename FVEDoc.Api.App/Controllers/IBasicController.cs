@@ -1,7 +1,5 @@
-﻿using FVEDoc.Common.Models.Battery;
-using FVEDoc.DAL.Common;
+﻿using FVEDoc.DAL.Common;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 
 namespace FVEDoc.Api.App.Controllers;
 

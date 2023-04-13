@@ -1,7 +1,5 @@
-﻿using FVEDoc.Api.BLL.Facades;
-using FVEDoc.Api.BLL.Facades.Interfaces;
+﻿using FVEDoc.Api.BLL.Facades.Interfaces;
 using FVEDoc.Api.DAL.Common.Entities;
-using FVEDoc.Api.DAL.Common.Repositories;
 using FVEDoc.Common.Models.Battery;
 using Microsoft.AspNetCore.Mvc;
 
