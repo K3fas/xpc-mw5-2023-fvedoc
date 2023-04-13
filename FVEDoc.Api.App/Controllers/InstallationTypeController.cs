@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("installation-type")]
 public class InstallationTypeController : BasicController<InstallationTypeEntity, InstallationTypeModel>
 {
     public InstallationTypeController(ILogger<InstallationTypeController> logger, IInstallationTypeFacade facade)

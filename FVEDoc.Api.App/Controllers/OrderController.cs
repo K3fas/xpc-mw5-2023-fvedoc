@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("order")]
 public class OrderController : BasicController<OrderEntity, OrderModel>
 {
     public OrderController(ILogger<OrderController> logger, IOrderFacade facade)

@@ -20,10 +20,20 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
 
     [HttpPost]
     [Route("")]
-    public Guid? Create(TModel model)
+    public IActionResult Create(TModel model)
     {
         _logger.LogInformation("Creating entity {entity}", model.Id);
-        return _facade.Create(model);
+
+        try
+        {
+            return Ok(_facade.Create(model));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning("Failed to crate entity !");
+            _logger.LogWarning("{ex}", ex.Message);
+            return BadRequest();
+        }
     }
 
     [HttpDelete]

@@ -15,7 +15,7 @@ public interface IBasicController<TModel> where TModel : IModelBase
 
     [HttpPost]
     [Route("create")]
-    public Guid? Create(TModel model);
+    public IActionResult? Create(TModel model);
 
     [HttpDelete]
     [Route("delete/{id?}")]

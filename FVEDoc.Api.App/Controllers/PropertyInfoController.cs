@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("property-info")]
 public class PropertyInfoController : BasicController<PropertyInfoEntity, PropertyInfoModel>
 {
     public PropertyInfoController(ILogger<PropertyInfoController> logger, IPropertyInfoFacade facade)

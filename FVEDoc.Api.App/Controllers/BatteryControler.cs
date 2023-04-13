@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FVEDoc.Api.App.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("battery")]
 public class BatteryControler :  BasicController<BatteryEntity, BatteryModel>
 {
     private readonly ILogger<BatteryControler> _logger;

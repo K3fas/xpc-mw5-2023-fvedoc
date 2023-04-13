@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("car-charger")]
 public class CarChargerController : BasicController<CarChargerEntity, CarChargerModel>
 {
     public CarChargerController(ILogger<CarChargerController> logger, ICarChargerFacade facade)
