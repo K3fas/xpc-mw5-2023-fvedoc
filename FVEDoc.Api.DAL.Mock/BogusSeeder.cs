@@ -2,41 +2,29 @@
 using FVEDoc.Api.DAL.Common.Entities;
 
 namespace FVEDoc.Api.DAL.Mock;
-public class BogusSeeder
+public static class BogusSeeder
 {
-    private readonly List<string> _places = new() { "Basement", "Hallway", "Technical room" };
-    public IList<BatteryEntity> Batteries { get; } = new List<BatteryEntity>();
-    public IList<CadastreDataEntity> CadastreData { get; } = new List<CadastreDataEntity>();
-    public IList<CarChargerEntity> CarChargers { get; } = new List<CarChargerEntity>();
-    public IList<CustomerEntity> Customers { get; } = new List<CustomerEntity>();
-    public IList<InstallationInfoEntity> InstallationInfos { get; } = new List<InstallationInfoEntity>();
-    public IList<InstallationTypeEntity> InstallationTypes { get; } = new List<InstallationTypeEntity>();
-    public IList<InverterEntity> Inverters { get; } = new List<InverterEntity>();
-    public IList<OrderEntity> Orders { get; } = new List<OrderEntity>();
-    public IList<PropertyInfoEntity> PropertyInfos { get; } = new List<PropertyInfoEntity>();
-    public IList<PVPanelEntity> PVPanels { get; } = new List<PVPanelEntity>();
-
-    public BogusSeeder()
+    private static readonly List<string> _places = new() { "Basement", "Hallway", "Technical room" };
+    public static void SeedData(MockDb db)
     {
-        SeedBatteries();
-        SeedCadastreData();
-        SeedCarChargers();
-        SeedCustomers();
-        SeedInverters();
-        SeedPropertyInfo();
-        SeedPVPanels();
-        SeeInstallationTypes();
-        SeedInstalaltionInfos();
-        SeedOrers();
-
+        SeedBatteries(db);
+        SeedCadastreData(db);
+        SeedCarChargers(db);
+        SeedCustomers(db);
+        SeedInverters(db);
+        SeedPropertyInfo(db);
+        SeedPVPanels(db);
+        SeeInstallationTypes(db);
+        SeedInstalaltionInfos(db);
+        SeedOrers(db);
     }
 
-    private void SeedBatteries()
+    static private void SeedBatteries(MockDb db)
     {
         var faker = new Faker<BatteryEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.BlockCapacity, x => x.Random.Double(0, 20))
-            .RuleFor(x => x.BlockCount, x => x.Random.Int(0,5))
+            .RuleFor(x => x.BlockCount, x => x.Random.Int(0, 5))
             .RuleFor(x => x.BlockTechnology, x => x.Name.JobTitle())
             .RuleFor(x => x.ContinuousCharge, x => x.Random.Double(0, 10))
             .RuleFor(x => x.ContinuousDischarge, x => x.Random.Double(0, 10))
@@ -51,12 +39,12 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            Batteries.Add(item);
+            db.Batteries.Add(item);
         }
 
     }
 
-    private void SeedCadastreData()
+    static private void SeedCadastreData(MockDb db)
     {
         var faker = new Faker<CadastreDataEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
@@ -71,11 +59,11 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            CadastreData.Add(item);
+            db.CadastreData.Add(item);
         }
     }
 
-    private void SeedCarChargers()
+    static private void SeedCarChargers(MockDb db)
     {
         var faker = new Faker<CarChargerEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
@@ -88,12 +76,12 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            CarChargers.Add(item);
+            db.CarChargers.Add(item);
         }
 
     }
 
-    private void SeedCustomers()
+    static private void SeedCustomers(MockDb db)
     {
         var faker = new Faker<CustomerEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
@@ -108,19 +96,19 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            Customers.Add(item);
+            db.Customers.Add(item);
         }
 
     }
 
-    private void SeedInstalaltionInfos()
+    static private void SeedInstalaltionInfos(MockDb db)
     {
         var faker = new Faker<InstallationInfoEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
             .RuleFor(x => x.CYADiameter, x => x.Random.Int(8, 16))
-            .RuleFor(x => x.InstallationType, x => x.PickRandom(InstallationTypes))
+            .RuleFor(x => x.InstallationType, x => x.PickRandom(db.InstallationTypes))
             .RuleFor(x => x.PVStrings, x => x.Random.ListItems(new List<int> { 8, 9, 10, 11, 12, 13, 14 }, 2))
             .RuleFor(x => x.SolarCable, x => "EUCASOLAR")
             .RuleFor(x => x.TechnologyPlace, x => x.PickRandom(_places));
@@ -128,34 +116,34 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            InstallationInfos.Add(item);
+            db.InstallationInfos.Add(item);
         }
 
     }
 
-    private void SeeInstallationTypes()
+    static private void SeeInstallationTypes(MockDb db)
     {
         var faker = new Faker<InstallationTypeEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
-            .RuleFor(x => x.Battery, x => x.PickRandom(Batteries))
-            .RuleFor(x => x.CarCharger, x => x.PickRandom(CarChargers))
-            .RuleFor(x => x.Inverter, x => x.PickRandom(Inverters))
+            .RuleFor(x => x.Battery, x => x.PickRandom(db.Batteries))
+            .RuleFor(x => x.CarCharger, x => x.PickRandom(db.CarChargers))
+            .RuleFor(x => x.Inverter, x => x.PickRandom(db.Inverters))
             .RuleFor(x => x.Power, x => x.Random.Double(6, 9.99))
-            .RuleFor(x => x.PVPanel, x => x.PickRandom(PVPanels))
+            .RuleFor(x => x.PVPanel, x => x.PickRandom(db.PVPanels))
             .RuleFor(x => x.PVPanelCount, x => x.Random.Int(16, 24))
             .RuleFor(x => x.PVTypeID, x => x.Random.ListItem(new List<string> { "Aa1", "B", "C1", "Ca1" }));
 
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            InstallationTypes.Add(item);
+            db.InstallationTypes.Add(item);
         }
 
     }
 
-    private void SeedInverters()
+    private static void SeedInverters(MockDb db)
     {
         var faker = new Faker<InverterEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
@@ -172,34 +160,34 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            Inverters.Add(item);
+            db.Inverters.Add(item);
         }
     }
 
-    private void SeedOrers()
+    private static void SeedOrers(MockDb db)
     {
         var faker = new Faker<OrderEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
-            .RuleFor(x => x.InstallationType, x => x.PickRandom(InstallationTypes))
+            .RuleFor(x => x.InstallationType, x => x.PickRandom(db.InstallationTypes))
             .RuleFor(x => x.OrderId, x => x.Random.Int(0, 900));
 
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            Orders.Add(item);
+            db.Orders.Add(item);
         }
 
     }
 
-    private void SeedPropertyInfo()
+    private static void SeedPropertyInfo(MockDb db)
     {
         var faker = new Faker<PropertyInfoEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
-            .RuleFor(x => x.CadastreData, x => x.PickRandom(CadastreData))
+            .RuleFor(x => x.CadastreData, x => x.PickRandom(db.CadastreData))
             .RuleFor(x => x.MainCB, x => x.PickRandom(new List<int> { 25, 30, 35, 40 }))
             .RuleFor(x => x.MainCBPlace, x => x.PickRandom(_places))
             .RuleFor(x => x.MainHeating, x => x.PickRandom(new List<string> { "Electric boiler", "Solid fuels", "Gas boiler", "Heat pump" }))
@@ -209,11 +197,11 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            PropertyInfos.Add(item);
+            db.PropertyInfos.Add(item);
         }
     }
 
-    private void SeedPVPanels()
+    private static void SeedPVPanels(MockDb db)
     {
         var faker = new Faker<PVPanelEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
@@ -232,7 +220,7 @@ public class BogusSeeder
         var fakes = faker.GenerateBetween(10, 20);
         foreach (var item in fakes)
         {
-            PVPanels.Add(item);
+            db.PVPanels.Add(item);
         }
 
 
