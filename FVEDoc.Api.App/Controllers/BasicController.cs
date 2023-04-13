@@ -19,7 +19,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpPost]
-    [Route("create")]
+    [Route("")]
     public Guid? Create(TModel model)
     {
         _logger.LogInformation("Creating entity {entity}", model.Id);
@@ -27,7 +27,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpDelete]
-    [Route("delete/{id?}")]
+    [Route("{id?}")]
     public void Delete(Guid id)
     {
         _logger.LogInformation("Deleting entity {entity}", id);
@@ -35,7 +35,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpGet]
-    [Route("all")]
+    [Route("")]
     public IEnumerable<TModel> GetAll()
     {
         _logger.LogInformation("Getting all models");
@@ -51,7 +51,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpPut]
-    [Route("update")]
+    [Route("")]
     public Guid? Update(TModel model)
     {
         _logger.LogInformation("Updating entity {entity}", model.Id);
