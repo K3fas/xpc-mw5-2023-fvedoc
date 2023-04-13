@@ -1,11 +1,4 @@
-﻿using FVEDoc.DAL.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FVEDoc.Common.Models.CadastreData;
+﻿namespace FVEDoc.Common.Models.CadastreData;
 public class CadastreDataModel : ModelBase
 {
     public required string ParcelNumber { get; set; }

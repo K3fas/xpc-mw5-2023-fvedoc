@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("pv-panel")]
 public class PVPanelController : BasicController<PVPanelEntity, PVPanelModel>
 {
     public PVPanelController(ILogger<PVPanelController> logger, IPVPanelFacade facade)

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FVEDoc.Common.Models.Inverter;
+﻿namespace FVEDoc.Common.Models.Inverter;
 public class InverterModel : ModelBase
 {
     public required string Name { get; set; }

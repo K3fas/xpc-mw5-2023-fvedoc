@@ -1,11 +1,4 @@
-﻿using FVEDoc.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FVEDoc.Api.DAL.Common.Entities;
+﻿namespace FVEDoc.Api.DAL.Common.Entities;
 public class InstallationTypeEntity : EntityBase
 {
     public required string PVTypeID { get; set; }

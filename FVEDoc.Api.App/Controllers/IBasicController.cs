@@ -1,7 +1,5 @@
-﻿using FVEDoc.Common.Models.Battery;
-using FVEDoc.DAL.Common;
+﻿using FVEDoc.DAL.Common;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 
 namespace FVEDoc.Api.App.Controllers;
 
@@ -17,7 +15,7 @@ public interface IBasicController<TModel> where TModel : IModelBase
 
     [HttpPost]
     [Route("create")]
-    public Guid? Create(TModel model);
+    public IActionResult? Create(TModel model);
 
     [HttpDelete]
     [Route("delete/{id?}")]
