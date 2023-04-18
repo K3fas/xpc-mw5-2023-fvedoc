@@ -3,6 +3,7 @@ using FVEDoc.Common.BL.Facades;
 using FVEDoc.DAL.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Reflection;
 
 namespace FVEDoc.Api.App.Controllers;
@@ -21,7 +22,9 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpPost("", Order = 1)]
-    public async virtual Task<Results<BadRequest, Created<Guid>>> CreateAsync(TModel model)
+    [SwaggerResponse(StatusCodes.Status201Created)]
+    [SwaggerResponse(StatusCodes.Status400BadRequest)]
+    public virtual async Task<Results<BadRequest, Created<Guid>>> CreateAsync(TModel model)
     {
         _logger.LogInformation("Creating entity {entity}", model.Id);
 
@@ -40,7 +43,9 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpGet("", Order = 1)]
-    public async virtual Task<Results<NoContent, Ok<IEnumerable<IModelBase>>>> GetAllAsync()
+    [SwaggerResponse(StatusCodes.Status200OK)]
+    [SwaggerResponse(StatusCodes.Status204NoContent)]
+    public virtual async Task<Results<NoContent, Ok<IEnumerable<IModelBase>>>> GetAllAsync()
     {
         _logger.LogInformation("Getting all models");
         try
@@ -58,7 +63,9 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpGet("{id?}", Order = 1)]
-    public async virtual Task<Results<NotFound, Ok<TModel>>> GetByIdAsync(Guid id)
+    [SwaggerResponse(StatusCodes.Status200OK)]
+    [SwaggerResponse(StatusCodes.Status404NotFound)]
+    public virtual async Task<Results<NotFound, Ok<TModel>>> GetByIdAsync(Guid id)
     {
         _logger.LogInformation("Getting model by id {id}", id);
         try
@@ -76,7 +83,9 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpPut("", Order = 1)]
-    public async virtual Task<Results<BadRequest, Ok<Guid>>> UpdateAsync(TModel model)
+    [SwaggerResponse(StatusCodes.Status200OK)]
+    [SwaggerResponse(StatusCodes.Status400BadRequest)]
+    public virtual async Task<Results<BadRequest, Ok<Guid>>> UpdateAsync(TModel model)
     {
         _logger.LogInformation("Updating entity {entity}", model.Id);
         try
@@ -95,7 +104,9 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     }
 
     [HttpDelete("{id?}", Order = 1)]
-    public async virtual Task<Results<NotFound, Ok<Guid>>> DeleteAsync(Guid id)
+    [SwaggerResponse(StatusCodes.Status200OK)]
+    [SwaggerResponse(StatusCodes.Status404NotFound)]
+    public virtual async Task<Results<NotFound, Ok<Guid>>> DeleteAsync(Guid id)
     {
         _logger.LogInformation("Deleting entity {entity}", id);
         try
