@@ -4,7 +4,7 @@ using FVEDoc.Api.DAL.Common.Repositories;
 namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class InverterRepository : RepositoryBase<InverterEntity>, IInverterRepository
 {
-    public InverterRepository(BogusSeeder bogus)
+    public InverterRepository(MockDb bogus)
         :base(bogus.Inverters)
     {
     }

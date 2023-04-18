@@ -4,7 +4,7 @@ using FVEDoc.Api.DAL.Common.Repositories;
 namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class PVPanelRepository : RepositoryBase<PVPanelEntity>, IPVPanelRepository
 {
-    public PVPanelRepository(BogusSeeder bogus)
+    public PVPanelRepository(MockDb bogus)
         :base(bogus.PVPanels)
     {
     }

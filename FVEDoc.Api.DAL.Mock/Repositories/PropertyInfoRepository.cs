@@ -4,7 +4,7 @@ using FVEDoc.Api.DAL.Common.Repositories;
 namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class PropertyInfoRepository : RepositoryBase<PropertyInfoEntity>, IPropertyInfoRepository
 {
-    public PropertyInfoRepository(BogusSeeder bogus)
+    public PropertyInfoRepository(MockDb bogus)
         :base(bogus.PropertyInfos)
     {
     }

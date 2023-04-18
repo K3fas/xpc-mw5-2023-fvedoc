@@ -13,7 +13,7 @@ public class ApiDALMockInstaller : IInstaller
                         .AddClasses(classes => classes.AssignableTo(typeof(IApiRepository<>)))
                             .AsMatchingInterface()
                             .WithTransientLifetime()
-                        .AddClasses(classes => classes.AssignableTo<BogusSeeder>())
+                        .AddClasses(classes => classes.AssignableTo<MockDb>())
                             .AsSelf()
                             .WithSingletonLifetime()
         );

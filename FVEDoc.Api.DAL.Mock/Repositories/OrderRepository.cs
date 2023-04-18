@@ -4,7 +4,7 @@ using FVEDoc.Api.DAL.Common.Repositories;
 namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class OrderRepository : RepositoryBase<OrderEntity>, IOrderRepository
 {
-    public OrderRepository(BogusSeeder bogus)
+    public OrderRepository(MockDb bogus)
         :base(bogus.Orders)
     {
     }

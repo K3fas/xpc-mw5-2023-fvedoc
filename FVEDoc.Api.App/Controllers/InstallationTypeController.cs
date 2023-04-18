@@ -8,8 +8,16 @@ namespace FVEDoc.Api.App.Controllers;
 [Route("installation-type")]
 public class InstallationTypeController : BasicController<InstallationTypeEntity, InstallationTypeModel>
 {
+    private readonly IInstallationTypeFacade _facade;
+
     public InstallationTypeController(ILogger<InstallationTypeController> logger, IInstallationTypeFacade facade)
         : base(logger, facade)
     {
+        _facade=facade;
     }
+    //[HttpGet("", Order = -1)]
+    //public override IEnumerable<InstallationTypeListModel> GetAllAsyc()
+    //{
+    //    return _facade.GetAll<InstallationTypeListModel>();
+    //}
 }
