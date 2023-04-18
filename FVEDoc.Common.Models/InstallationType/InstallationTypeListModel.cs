@@ -1,9 +1,4 @@
-﻿using FVEDoc.Common.Models.Battery;
-using FVEDoc.Common.Models.CarCharger;
-using FVEDoc.Common.Models.Inverter;
-using FVEDoc.Common.Models.PVPanel;
-
-namespace FVEDoc.Common.Models.InstallationType;
+﻿namespace FVEDoc.Common.Models.InstallationType;
 public class InstallationTypeListModel : ModelBase
 {
     public required string PVTypeID { get; set; }

@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0c004f08-15fb-4887-93dd-7c0b47770e0a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FVEDoc.Api.BLL\FVEDoc.Api.BLL.csproj" />
     <ProjectReference Include="..\FVEDoc.Api.DAL.Mock\FVEDoc.Api.DAL.Mock.csproj" />
+    <ProjectReference Include="..\FVEDoc.Api.DAL.Mongo\FVEDoc.Api.DAL.Mongo.csproj" />
   </ItemGroup>
 
 

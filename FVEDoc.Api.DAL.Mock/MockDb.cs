@@ -1,5 +1,4 @@
-﻿using Bogus;
-using FVEDoc.Api.DAL.Common.Entities;
+﻿using FVEDoc.Api.DAL.Common.Entities;
 
 namespace FVEDoc.Api.DAL.Mock;
 public class MockDb

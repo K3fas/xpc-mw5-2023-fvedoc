@@ -1,11 +1,19 @@
 using AutoMapper;
 using FVEDoc.Api.BLL.Installers;
 using FVEDoc.Api.DAL.Common.Entities;
-using FVEDoc.Api.DAL.Mock.Installers;
+using FVEDoc.Api.DAL.Mongo.Installers;
 using FVEDoc.Common.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Create config
+
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false)
+    .AddUserSecrets<Program>()
+    .Build();
+
 
 // Add services to the container.
 
@@ -30,7 +38,6 @@ builder.Services.AddSwaggerGen(c =>
         return best_descr;
     });
 });
-
 
 ConfigureAutoMapper(builder.Services);
 ConfigureDependencies(builder.Services, builder.Configuration);
@@ -57,13 +64,13 @@ app.Run();
 
 void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
 {
-    services.AddInstaller<ApiDALMockInstaller>();
+    //services.AddInstaller<ApiDALMockInstaller>();
+    services.AddInstaller<ApiDALMongoInstaller>();
     services.AddInstaller<ApiBLLInstaller>();
 }
 
 void ConfigureAutoMapper(IServiceCollection services)
 {
-    //services.AddAutoMapper(cfg => { }, typeof(EntityBase), typeof(ApiBLLInstaller));
     services.AddAutoMapper(typeof(EntityBase), typeof(ApiBLLInstaller));
 }
 
