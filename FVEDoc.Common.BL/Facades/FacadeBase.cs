@@ -17,53 +17,52 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
         _mapper=mapper;
     }
 
-    virtual public Guid? Create(TModel model)
+    public virtual async Task<Guid?> CreateAsync(TModel model, CancellationToken c = default)
     {
-        if(_repository.Exists(model.Id))
+        if (await _repository.ExistsAsync(model.Id, c))
             return null;
 
         var entity = _mapper.Map<TEntity>(model);
         entity.DateCreated = DateTimeOffset.UtcNow;
 
-        return _repository.Insert(entity);
+        return await _repository.InsertAsync(entity, c);
     }
 
-    virtual public Guid? CreateOrUpdate(TModel model)
+    public virtual async Task<Guid?> CreateOrUpdateAsync(TModel model, CancellationToken c = default)
     {
-        return _repository.Exists(model.Id)
-            ? Update(model)
-            : Create(model);
+        return await _repository.ExistsAsync(model.Id, c)
+            ? await UpdateAsync(model, c)
+            : await CreateAsync(model, c);
     }
 
-    virtual public Guid? Delete(Guid id)
+    public virtual async Task<Guid?> DeleteAsync(Guid id, CancellationToken c)
     {
-        if(_repository.Exists(id))
+        if (await _repository.ExistsAsync(id, c))
         {
-            _repository.Delete(id);
-            return id;
+            return await _repository.DeleteAsync(id, c) ? id : null;
         }
         return null;
     }
 
-    public virtual List<TListModel> GetAll<TListModel>() where TListModel : IModelBase
+    public virtual async Task<List<TListModel>> GetAllAsync<TListModel>(CancellationToken c = default) where TListModel : IModelBase
     {
-        return _mapper.Map<List<TListModel>>(_repository.GetAll());
+        return _mapper.Map<List<TListModel>>(await _repository.GetAllAsync(c));
     }
 
-    virtual public TModel? GetById(Guid id)
+    public virtual async Task<TModel?> GetByIdAsync(Guid id, CancellationToken c = default)
     {
-        return _mapper.Map<TModel>(_repository.GetById(id));
+        return _mapper.Map<TModel>(await _repository.GetByIdAsync(id, c));
     }
 
-    virtual public Guid? Update(TModel model)
+    virtual public async Task<Guid?> UpdateAsync(TModel model, CancellationToken c = default)
     {
-        if(! _repository.Exists(model.Id))
+        if (! await _repository.ExistsAsync(model.Id, c))
             return null;
 
         var entity = _mapper.Map<TEntity>(model);
         entity.DateModified = DateTimeOffset.UtcNow;
 
-        return _repository.Update(entity);
+        return await _repository.UpdateAsync(entity, c);
     }
 }
 

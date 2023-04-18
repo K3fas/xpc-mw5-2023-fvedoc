@@ -6,11 +6,11 @@ public interface IFacadeBase<TEntity, TModel>
     where TEntity : IEntity
     where TModel : IModelBase
 {
-    List<TListModel> GetAll<TListModel>() where TListModel : IModelBase;
-    TModel? GetById(Guid id);
-    Guid? CreateOrUpdate(TModel model);
-    Guid? Create(TModel model);
-    Guid? Update(TModel model);
-    Guid? Delete(Guid id);
+    Task<List<TListModel>> GetAllAsync<TListModel>(CancellationToken c = default) where TListModel : IModelBase;
+    Task<TModel?> GetByIdAsync(Guid id, CancellationToken c = default);
+    Task<Guid?> CreateOrUpdateAsync(TModel model, CancellationToken c = default);
+    Task<Guid?> CreateAsync(TModel model, CancellationToken c = default);
+    Task<Guid?> UpdateAsync(TModel model, CancellationToken c = default);
+    Task<Guid?> DeleteAsync(Guid id, CancellationToken c = default);
 }
 
