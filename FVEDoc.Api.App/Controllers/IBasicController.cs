@@ -5,7 +5,7 @@ namespace FVEDoc.Api.App.Controllers;
 
 public interface IBasicController<TModel> where TModel : IModelBase
 {
-    public IEnumerable<TModel> GetAll();
+    public IEnumerable<IModelBase> GetAll();
 
     public TModel? GetById(Guid id);
 

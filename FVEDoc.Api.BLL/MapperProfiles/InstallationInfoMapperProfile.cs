@@ -6,12 +6,6 @@ public class InstallationInfoMapperProfile : MapperBase<InstallationInfoEntity, 
 {
     public InstallationInfoMapperProfile()
     {
-
-        //CreateMap<InstallationInfoEntity, InstallationInfoModel>()
-        //    .ForMember(dest => dest.InstallationType, act => act.MapFrom(src => src.InstallationType));
-        //CreateMap<InstallationInfoModel, InstallationInfoEntity>()
-        //    .ForMember(dest => dest.InstallationType, act => act.MapFrom(src => src.InstallationType));
-
     }
 }
 

@@ -18,8 +18,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
         _facade=facade;
     }
 
-    [HttpPost]
-    [Route("")]
+    [HttpPost("")]
     public virtual IActionResult Create(TModel model)
     {
         _logger.LogInformation("Creating entity {entity}", model.Id);
@@ -36,32 +35,28 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
         }
     }
 
-    [HttpDelete]
-    [Route("{id?}")]
+    [HttpDelete("{id?}")]
     public virtual void Delete(Guid id)
     {
         _logger.LogInformation("Deleting entity {entity}", id);
         _facade.Delete(id);
     }
 
-    [HttpGet]
-    [Route("")]
-    public virtual IEnumerable<TModel> GetAll()
+    [HttpGet("", Order = 0)]
+    public virtual IEnumerable<IModelBase> GetAll()
     {
         _logger.LogInformation("Getting all models");
-        return _facade.GetAll();
+        return (IEnumerable<IModelBase>)_facade.GetAll<TModel>();
     }
 
-    [HttpGet]
-    [Route("{id?}")]
+    [HttpGet("{id?}")]
     public virtual TModel? GetById(Guid id)
     {
         _logger.LogInformation("Getting model by id {id}",id);
         return _facade.GetById(id);
     }
 
-    [HttpPut]
-    [Route("")]
+    [HttpPut("")]
     public virtual Guid? Update(TModel model)
     {
         _logger.LogInformation("Updating entity {entity}", model.Id);

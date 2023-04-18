@@ -6,7 +6,7 @@ public interface IFacadeBase<TEntity, TModel>
     where TEntity : IEntity
     where TModel : IModelBase
 {
-    List<TModel> GetAll();
+    List<TListModel> GetAll<TListModel>() where TListModel : IModelBase;
     TModel? GetById(Guid id);
     Guid CreateOrUpdate(TModel model);
     Guid Create(TModel model);
