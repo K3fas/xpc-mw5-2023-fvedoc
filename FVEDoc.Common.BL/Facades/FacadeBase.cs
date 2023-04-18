@@ -17,10 +17,10 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
         _mapper=mapper;
     }
 
-    virtual public Guid Create(TModel model)
+    virtual public Guid? Create(TModel model)
     {
         if(_repository.Exists(model.Id))
-            return model.Id;
+            return null;
 
         var entity = _mapper.Map<TEntity>(model);
         entity.DateCreated = DateTimeOffset.UtcNow;
@@ -28,16 +28,21 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
         return _repository.Insert(entity);
     }
 
-    virtual public Guid CreateOrUpdate(TModel model)
+    virtual public Guid? CreateOrUpdate(TModel model)
     {
         return _repository.Exists(model.Id)
             ? Update(model)
             : Create(model);
     }
 
-    virtual public void Delete(Guid id)
+    virtual public Guid? Delete(Guid id)
     {
-        _repository.Delete(id);
+        if(_repository.Exists(id))
+        {
+            _repository.Delete(id);
+            return id;
+        }
+        return null;
     }
 
     public virtual List<TListModel> GetAll<TListModel>() where TListModel : IModelBase
@@ -50,10 +55,10 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
         return _mapper.Map<TModel>(_repository.GetById(id));
     }
 
-    virtual public Guid Update(TModel model)
+    virtual public Guid? Update(TModel model)
     {
         if(! _repository.Exists(model.Id))
-            return model.Id;
+            return null;
 
         var entity = _mapper.Map<TEntity>(model);
         entity.DateModified = DateTimeOffset.UtcNow;

@@ -15,9 +15,9 @@ public class InstallationTypeController : BasicController<InstallationTypeEntity
     {
         _facade=facade;
     }
-    [HttpGet("", Order = -1)]
-    public override IEnumerable<InstallationTypeListModel> GetAll()
-    {
-        return _facade.GetAll<InstallationTypeListModel>();
-    }
+    //[HttpGet("", Order = -1)]
+    //public override IEnumerable<InstallationTypeListModel> GetAllAsyc()
+    //{
+    //    return _facade.GetAll<InstallationTypeListModel>();
+    //}
 }

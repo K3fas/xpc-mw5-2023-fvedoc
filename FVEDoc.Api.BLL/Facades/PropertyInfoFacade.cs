@@ -17,7 +17,7 @@ public class PropertyInfoFacade : FacadeBase<PropertyInfoEntity, PropertyInfoMod
     {
         _cadastreFacade=cadastreFacade;
     }
-    public override Guid Create(PropertyInfoModel model)
+    public override Guid? Create(PropertyInfoModel model)
     {
         if (_repository.Exists(model.Id))
             return model.Id;
