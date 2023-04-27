@@ -8,11 +8,14 @@ public class MongoDbContext
     private readonly IMongoDatabase _database;
     public MongoDbContext(IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("MongoDB");
-        _client = new MongoClient(connectionString);
+        MongoUrl connectionString = new(configuration.GetConnectionString("MongoDB"));
+        var settings = MongoClientSettings.FromUrl(connectionString);
+        _client = new MongoClient(settings);
+
 
         var databaseName = configuration.GetValue<string>("DatabaseName");
         _database = _client.GetDatabase(databaseName);
+
     }
 
     public IMongoCollection<T> GetCollection<T>(string collectionName)

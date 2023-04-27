@@ -18,5 +18,12 @@
     <ProjectReference Include="..\FVEDoc.Api.DAL.Mock\FVEDoc.Api.DAL.Mock.csproj" />
     <ProjectReference Include="..\FVEDoc.Api.DAL.Mongo\FVEDoc.Api.DAL.Mongo.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update="wwwroot\appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
 </Project>

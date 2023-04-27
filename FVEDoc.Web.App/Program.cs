@@ -2,19 +2,20 @@ using AutoMapper;
 using FVEDoc.Api.BLL.Installers;
 using FVEDoc.Api.DAL.Common.Entities;
 using FVEDoc.Api.DAL.Mongo.Installers;
-using FVEDoc.Web.App;
 using FVEDoc.Common.Extensions;
+using FVEDoc.Web.App;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 // Create config
-
+// TODO: Fix
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false)
     .AddUserSecrets<Program>()
     .Build();
+
 
 
 builder.RootComponents.Add<App>("#app");

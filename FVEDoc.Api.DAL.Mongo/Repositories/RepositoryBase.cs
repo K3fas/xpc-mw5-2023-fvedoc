@@ -37,7 +37,7 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
         var filter = Builders<T>.Filter.Eq(x => x.Id, id);
         var cursor = await _collection.FindAsync(filter, cancellationToken: c);
         return await cursor.FirstOrDefaultAsync(c);
-    }
+     }
 
     public async Task<Guid> InsertAsync(T entity, CancellationToken c = default)
     {

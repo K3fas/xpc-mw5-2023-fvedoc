@@ -1,9 +1,10 @@
 ﻿using FVEDoc.Common.Enums;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace FVEDoc.Common;
 public struct Size
 {
-    public UnitType<double> Height { get; set; }
-    public UnitType<double> Width { get; set; }
-    public UnitType<double> Depth { get; set; }
+    public UnitType Height { get; set; }
+    public UnitType Width { get; set; }
+    public UnitType Depth { get; set; }
 }
