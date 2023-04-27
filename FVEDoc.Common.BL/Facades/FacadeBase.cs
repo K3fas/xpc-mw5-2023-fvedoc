@@ -37,11 +37,7 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
 
     public virtual async Task<Guid?> DeleteAsync(Guid id, CancellationToken c)
     {
-        if (await _repository.ExistsAsync(id, c))
-        {
-            return await _repository.DeleteAsync(id, c) ? id : null;
-        }
-        return null;
+        return await _repository.ExistsAsync(id, c) ? await _repository.DeleteAsync(id, c) ? id : null : null;
     }
 
     public virtual async Task<List<TListModel>> GetAllAsync<TListModel>(CancellationToken c = default) where TListModel : IModelBase

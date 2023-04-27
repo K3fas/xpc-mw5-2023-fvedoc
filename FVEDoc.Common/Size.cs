@@ -1,4 +1,6 @@
-﻿namespace FVEDoc.Common;
+﻿using FVEDoc.Common.Enums;
+
+namespace FVEDoc.Common;
 public struct Size
 {
     public UnitType<double> Height { get; set; }

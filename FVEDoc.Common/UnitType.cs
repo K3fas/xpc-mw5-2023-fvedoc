@@ -1,8 +1,8 @@
 ﻿using FVEDoc.Common.Enums;
 
 namespace FVEDoc.Common;
-public struct UnitType<DataType>
+public struct UnitType<TData>
 {
-    public required DataType Value { get; set; }
+    public required TData Value { get; set; }
     public required Units Unit { get; set; }
 }

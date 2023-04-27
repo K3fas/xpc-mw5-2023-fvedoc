@@ -15,9 +15,9 @@ public class PropertyInfoFacade : FacadeBase<PropertyInfoEntity, PropertyInfoMod
     {
         _cadastreFacade=cadastreFacade;
     }
-    public override Guid? Create(PropertyInfoModel model)
+    public override async Task<Guid?> CreateAsync(PropertyInfoModel model, CancellationToken c = default)
     {
-        if (_repository.Exists(model.Id))
+        if (await _repository.ExistsAsync(model.Id))
             return model.Id;
 
         var entity = _mapper.Map<PropertyInfoEntity>(model);
@@ -26,10 +26,10 @@ public class PropertyInfoFacade : FacadeBase<PropertyInfoEntity, PropertyInfoMod
         // Try to insert new cadastre data
         if(model.CadastreData is not null)
         {
-            _cadastreFacade.CreateOrUpdate(model.CadastreData);
+            await _cadastreFacade.CreateOrUpdateAsync(model.CadastreData);
         }
 
-        return _repository.Insert(entity);
+        return await _repository.InsertAsync(entity);
     }
 }
 
