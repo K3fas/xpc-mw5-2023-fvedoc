@@ -1,8 +1,10 @@
 ﻿using FVEDoc.Common.Enums;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace FVEDoc.Common;
-public struct UnitType<DataType>
+public struct UnitType
 {
-    public required DataType Value { get; set; }
+    public required double Value { get; set; }
     public required Units Unit { get; set; }
+
 }

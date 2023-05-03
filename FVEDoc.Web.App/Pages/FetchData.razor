@@ -1,0 +1,47 @@
+﻿@page "/fetchdata"
+@using FVEDoc.Common.Models.Battery;
+@using FVEDoc.Web.DAL.Repositories;
+@inject HttpClient Http
+
+<PageTitle>Weather forecast</PageTitle>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (_batteries == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Capacity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var battery in _batteries)
+            {
+                <tr>
+                    <td>@battery.Id</td>
+                    <td>@battery.Name</td>
+                    <td>@battery.TotalCapacity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<BatteryListModel> _batteries;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var repo = new RepositoryBase<BatteryModel, BatteryListModel>(Http, "/battery");
+        _batteries = await repo.GetAllAsync();
+    }
+}

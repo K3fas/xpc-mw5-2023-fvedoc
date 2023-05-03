@@ -15,7 +15,7 @@ public class BatteryFacade : FacadeBase<BatteryEntity, BatteryModel>, IBatteryFa
 
     public List<BatteryListModel> GetListModels()
     {
-        return _mapper.Map<List<BatteryListModel>>(_repository.GetAll());
+        return _mapper.Map<List<BatteryListModel>>(_repository.GetAllAsync());
     }
 }
 

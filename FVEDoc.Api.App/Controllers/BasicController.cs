@@ -1,10 +1,9 @@
-﻿using FVEDoc.Api.DAL.Common.Entities.Interfaces;
-using FVEDoc.Common.BL.Facades;
-using FVEDoc.DAL.Common;
+﻿using FVEDoc.Api.BLL.Facades.Interfaces;
+using FVEDoc.Api.DAL.Common.Entities.Interfaces;
+using FVEDoc.Common.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Reflection;
 
 namespace FVEDoc.Api.App.Controllers;
 
@@ -30,7 +29,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
 
         try
         {
-            var id = _facade.Create(model);
+            var id = await _facade.CreateAsync(model);
             var location = $"/{model.Id}";
             return id is null ? TypedResults.BadRequest() : TypedResults.Created(location ?? "", id.GetValueOrDefault());
         }
@@ -50,7 +49,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
         _logger.LogInformation("Getting all models");
         try
         {
-            var list = (IEnumerable<IModelBase>)_facade.GetAll<TModel>();
+            var list =  (IEnumerable<IModelBase>)await _facade.GetAllAsync<TModel>();
             return list.Any() ? TypedResults.Ok(list) : TypedResults.NoContent();
         }
         catch (Exception ex)
@@ -70,7 +69,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
         _logger.LogInformation("Getting model by id {id}", id);
         try
         {
-            var model = _facade.GetById(id);
+            var model = await _facade.GetByIdAsync(id);
             return model is null ? TypedResults.NotFound() : TypedResults.Ok(model);
         }
         catch (Exception ex)
@@ -90,7 +89,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
         _logger.LogInformation("Updating entity {entity}", model.Id);
         try
         {
-            var id = _facade.CreateOrUpdate(model);
+            var id = await _facade.CreateOrUpdateAsync(model);
             return id is null ? TypedResults.BadRequest() : TypedResults.Ok(id.GetValueOrDefault());
 
         }
@@ -111,7 +110,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
         _logger.LogInformation("Deleting entity {entity}", id);
         try
         {
-            var found = _facade.Delete(id);
+            var found = await _facade.DeleteAsync(id);
             return found is null ? TypedResults.NotFound() : TypedResults.Ok(id);
 
         }

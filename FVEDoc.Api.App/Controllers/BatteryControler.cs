@@ -1,7 +1,7 @@
 ﻿using FVEDoc.Api.BLL.Facades.Interfaces;
 using FVEDoc.Api.DAL.Common.Entities;
+using FVEDoc.Common.Models;
 using FVEDoc.Common.Models.Battery;
-using FVEDoc.DAL.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +12,11 @@ namespace FVEDoc.Api.App.Controllers;
 public class BatteryControler :  BasicController<BatteryEntity, BatteryModel>
 {
     private readonly ILogger<BatteryControler> _logger;
-    private readonly IBatteryFacade _battery;
 
     public BatteryControler(ILogger<BatteryControler> logger, IBatteryFacade battery)
         :base(logger, battery)
     {
         _logger=logger;
-        _battery=battery;
     }
 
     [HttpGet("", Order = -1)]
@@ -27,7 +25,7 @@ public class BatteryControler :  BasicController<BatteryEntity, BatteryModel>
         _logger.LogInformation("Getting battery model list");
         try
         {
-            IEnumerable<IModelBase> list = _facade.GetAll<BatteryListModel>();
+            IEnumerable<IModelBase> list = await _facade.GetAllAsync<BatteryListModel>();
             return list.Any() ? TypedResults.Ok(list) : TypedResults.NoContent();
         }
         catch (Exception ex)

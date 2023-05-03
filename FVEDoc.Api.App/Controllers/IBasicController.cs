@@ -1,6 +1,5 @@
-﻿using FVEDoc.DAL.Common;
+﻿using FVEDoc.Common.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 
 namespace FVEDoc.Api.App.Controllers;
 

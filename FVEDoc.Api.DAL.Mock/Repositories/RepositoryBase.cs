@@ -9,42 +9,45 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
     {
         _entities = entities;
     }
-    public void Delete(Guid id)
+    public async Task<bool> DeleteAsync(Guid id, CancellationToken c = default)
     {
-        var toRemove = GetById(id);
-        if(toRemove != null)
+        var toRemove = await GetByIdAsync(id);
+        if (toRemove != null)
         {
             _entities.Remove(toRemove);
+            return true;
         }
+        return false;
     }
 
-    public bool Exists(Guid id)
+    public async Task<bool> ExistsAsync(Guid id, CancellationToken c = default)
     {
         return _entities.Select(x => x.Id).Contains(id);
     }
 
-    public IList<T> GetAll()
+    public async Task<IList<T>> GetAllAsync(CancellationToken c = default)
     {
         return _entities;
     }
 
-    public T? GetById(Guid id)
+    public async Task<T?> GetByIdAsync(Guid id, CancellationToken c = default)
     {
-        return Exists(id)
+        return await ExistsAsync(id, c)
             ? _entities.FirstOrDefault(x => x.Id == id)
             : null;
     }
 
-    public Guid Insert(T entity)
+    public async Task<Guid> InsertAsync(T entity, CancellationToken c = default)
     {
         _entities.Add(entity);
         return entity.Id;
     }
 
-    public Guid Update(T entity)
+
+    public async Task<Guid> UpdateAsync(T entity, CancellationToken c = default)
     {
-        var toUpdate = GetById(entity.Id);
-        if(toUpdate != null)
+        var toUpdate = await GetByIdAsync(entity.Id);
+        if (toUpdate != null)
         {
             _entities.Remove(toUpdate);
             _entities.Add(entity);

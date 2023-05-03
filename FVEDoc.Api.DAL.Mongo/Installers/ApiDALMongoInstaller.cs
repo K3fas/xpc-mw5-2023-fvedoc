@@ -1,0 +1,35 @@
+﻿using FVEDoc.Api.DAL.Common.Repositories;
+using FVEDoc.Common.Installers;
+using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson;
+using FVEDoc.Api.DAL.Mongo.Serializers;
+
+namespace FVEDoc.Api.DAL.Mongo.Installers;
+public class ApiDALMongoInstaller : IInstaller
+{
+    public void Install(IServiceCollection serviceCollection)
+    {
+        // Mongo
+        BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
+        BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
+        BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));     // needs to be initialized before MongoDB
+        BsonSerializer.RegisterSerializer(new SizeSerializer());
+        BsonSerializer.RegisterSerializer(new UnitTypeSerializer());
+
+
+        // Scrutor
+        serviceCollection.Scan(selector =>
+                selector.FromAssemblyOf<ApiDALMongoInstaller>()
+                        .AddClasses(classes => classes.AssignableTo(typeof(IApiRepository<>)))
+                            .AsMatchingInterface()
+                            .WithTransientLifetime()
+                        .AddClasses(classes => classes.AssignableTo<MongoDbContext>())
+                            .AsSelf()
+                            .WithSingletonLifetime()
+        );
+
+    }
+}
+
