@@ -1,6 +1,7 @@
 using AutoMapper;
 using FVEDoc.Api.BLL.Installers;
 using FVEDoc.Api.DAL.Common.Entities;
+using FVEDoc.Api.DAL.Mock.Installers;
 using FVEDoc.Api.DAL.Mongo.Installers;
 using FVEDoc.Common.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -39,6 +40,17 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "allcors",
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
+
 ConfigureAutoMapper(builder.Services);
 ConfigureDependencies(builder.Services, builder.Configuration);
 
@@ -55,6 +67,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("allcors");
+
 app.UseAuthorization();
 
 app.MapControllers();
@@ -64,8 +78,8 @@ app.Run();
 
 void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
 {
-    //services.AddInstaller<ApiDALMockInstaller>();
-    services.AddInstaller<ApiDALMongoInstaller>();
+    services.AddInstaller<ApiDALMockInstaller>();
+    //services.AddInstaller<ApiDALMongoInstaller>();
     services.AddInstaller<ApiBLLInstaller>();
 }
 

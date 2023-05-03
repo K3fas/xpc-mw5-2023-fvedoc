@@ -1,4 +1,8 @@
 ﻿@page "/counter"
+@using FVEDoc.Common.Models.Battery;
+@using FVEDoc.Web.DAL.Repositories;
+@using System.Text.Json;
+@inject HttpClient client
 
 <PageTitle>Counter</PageTitle>
 
@@ -11,7 +15,7 @@
 @code {
     private int currentCount = 0;
 
-    private void IncrementCount()
+    private async void IncrementCount()
     {
         currentCount++;
     }

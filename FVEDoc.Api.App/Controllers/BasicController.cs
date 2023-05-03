@@ -1,6 +1,6 @@
-﻿using FVEDoc.Api.DAL.Common.Entities.Interfaces;
-using FVEDoc.Common.BL.Facades;
-using FVEDoc.DAL.Common;
+﻿using FVEDoc.Api.BLL.Facades.Interfaces;
+using FVEDoc.Api.DAL.Common.Entities.Interfaces;
+using FVEDoc.Common.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

@@ -1,7 +1,7 @@
 ﻿using FVEDoc.Api.DAL.Common.Entities.Interfaces;
-using FVEDoc.DAL.Common;
+using FVEDoc.Common.Models;
 
-namespace FVEDoc.Common.BL.Facades;
+namespace FVEDoc.Api.BLL.Facades.Interfaces;
 public interface IFacadeBase<TEntity, TModel>
     where TEntity : IEntity
     where TModel : IModelBase

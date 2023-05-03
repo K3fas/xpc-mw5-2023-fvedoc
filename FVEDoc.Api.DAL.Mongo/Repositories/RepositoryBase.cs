@@ -7,9 +7,9 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
 {
     private readonly IMongoCollection<T> _collection;
 
-    public RepositoryBase(IMongoCollection<T> colelction)
+    public RepositoryBase(IMongoCollection<T> collection)
     {
-        _collection = colelction;
+        _collection = collection;
     }
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken c = default)
@@ -28,8 +28,16 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
 
     public async Task<IList<T>> GetAllAsync(CancellationToken c = default)
     {
-        var cursor = await _collection.FindAsync(new BsonDocument(), cancellationToken: c);
-        return await cursor.ToListAsync(c);
+        try
+        {
+            var cursor = await _collection.FindAsync(new BsonDocument(), cancellationToken: c);
+            return await cursor.ToListAsync(c);
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
     }
 
     public async Task<T?> GetByIdAsync(Guid id, CancellationToken c = default)

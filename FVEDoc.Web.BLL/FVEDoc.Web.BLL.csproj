@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
+    <Folder Include="Installers\" />
+    <Folder Include="MapperProfiles\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FVEDoc.Common.Models\FVEDoc.Common.Models.csproj" />
-    <ProjectReference Include="..\FVEDoc.Common\FVEDoc.Common.csproj" />
+    <ProjectReference Include="..\FVEDoc.Common.BL\FVEDoc.Common.BL.csproj" />
   </ItemGroup>
 
 </Project>

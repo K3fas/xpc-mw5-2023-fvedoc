@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using FVEDoc.Api.BLL.Facades.Interfaces;
 using FVEDoc.Api.DAL.Common.Entities.Interfaces;
 using FVEDoc.Api.DAL.Common.Repositories;
-using FVEDoc.DAL.Common;
+using FVEDoc.Common.Models;
 
-namespace FVEDoc.Common.BL.Facades;
+namespace FVEDoc.Api.BLL.Facades;
 public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
     where TEntity : IEntity
     where TModel : IModelBase

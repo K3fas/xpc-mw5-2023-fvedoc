@@ -1,4 +1,4 @@
-﻿using FVEDoc.DAL.Common;
+﻿using FVEDoc.Common.Models;
 
 namespace FVEDoc.Common;
 public class ModelBase : IModelBase

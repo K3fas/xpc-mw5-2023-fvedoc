@@ -1,7 +1,7 @@
 ﻿using FVEDoc.Api.BLL.Facades.Interfaces;
 using FVEDoc.Api.DAL.Common.Entities;
+using FVEDoc.Common.Models;
 using FVEDoc.Common.Models.Battery;
-using FVEDoc.DAL.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 

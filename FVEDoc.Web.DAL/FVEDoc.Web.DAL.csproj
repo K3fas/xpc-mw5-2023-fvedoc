@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
+    <Folder Include="ApiClients\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FVEDoc.Common.Models\FVEDoc.Common.Models.csproj" />
-    <ProjectReference Include="..\FVEDoc.Common\FVEDoc.Common.csproj" />
   </ItemGroup>
 
 </Project>
