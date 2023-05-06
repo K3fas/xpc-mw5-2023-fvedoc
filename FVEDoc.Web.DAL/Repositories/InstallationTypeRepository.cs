@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 namespace FVEDoc.Web.DAL.Repositories;
 public class InstallationInfoRepository : RepositoryBase<BatteryModel, BatteryListModel>
 {
-    public InstallationInfoRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<BatteryRepository> logger, string apiPath)
-        : base(httpClient, cache, config, logger, apiPath)
+    public InstallationInfoRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<InstallationInfoRepository> logger)
+        : base(httpClient, cache, config, logger, "installation-type")
     {
 
     }

@@ -8,6 +8,7 @@
 @inject HttpClient _httpClient;
 @inject IMemoryCache _cache;
 @inject IConfiguration _config;
+@inject BatteryRepository Repo;
 <h3>Test</h3>
 
 <button class="btn btn-primary" @onclick="LoadData">Load data</button>
@@ -41,9 +42,6 @@
 @code {
     private List<BatteryListModel> _batteries;
 
-
-    private RepositoryBase<BatteryModel, BatteryListModel>? _repo;
-    public RepositoryBase<BatteryModel, BatteryListModel> Repo => _repo ?? new RepositoryBase<BatteryModel, BatteryListModel>(_httpClient, _cache, _config, "/battery");
 
     async void LoadData()
     {

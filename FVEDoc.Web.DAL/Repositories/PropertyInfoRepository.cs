@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 namespace FVEDoc.Web.DAL.Repositories;
 public class PropertyInfoRepository : RepositoryBase<BatteryModel, BatteryListModel>
 {
-    public PropertyInfoRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<BatteryRepository> logger, string apiPath)
-        : base(httpClient, cache, config, logger, apiPath)
+    public PropertyInfoRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<PropertyInfoRepository> logger)
+        : base(httpClient, cache, config, logger, "proprerty-info")
     {
 
     }

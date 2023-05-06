@@ -12,7 +12,7 @@ public class WebDALInstaller : IInstaller
                 selector.FromAssemblyOf<WebDALInstaller>()
                         .AddClasses(classes => classes.AssignableTo(typeof(IWebRepository)))
                             .AsMatchingInterface()
-                            .WithTransientLifetime());
+                            .WithSingletonLifetime());
     }
 }
 

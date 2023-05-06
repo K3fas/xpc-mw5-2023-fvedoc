@@ -34,7 +34,7 @@ public class RepositoryBase<TDetailModel, TListModel> : IWebRepository
         var response = await _httpClient.PostAsJsonAsync(_apiPath + _endpoint, model, c);
         response.EnsureSuccessStatusCode();
 
-        ClearChache();
+        ClearChache(nameof(TListModel));
 
         return model.Id;
     }

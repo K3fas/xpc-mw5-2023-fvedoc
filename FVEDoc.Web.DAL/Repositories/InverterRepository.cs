@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 namespace FVEDoc.Web.DAL.Repositories;
 public class InverterRepository : RepositoryBase<BatteryModel, BatteryListModel>
 {
-    public InverterRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<BatteryRepository> logger, string apiPath)
-        : base(httpClient, cache, config, logger, apiPath)
+    public InverterRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<BatteryRepository> logger)
+        : base(httpClient, cache, config, logger, "inverter")
     {
 
     }

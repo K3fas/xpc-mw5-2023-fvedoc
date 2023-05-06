@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 namespace FVEDoc.Web.DAL.Repositories;
 public class CarChargerRepository : RepositoryBase<BatteryModel, BatteryListModel>
 {
-    public CarChargerRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<BatteryRepository> logger, string apiPath)
-        : base(httpClient, cache, config, logger, apiPath)
+    public CarChargerRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<CarChargerRepository> logger)
+        : base(httpClient, cache, config, logger, "car-charger")
     {
 
     }
