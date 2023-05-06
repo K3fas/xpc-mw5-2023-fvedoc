@@ -6,9 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FVEDoc.Web.DAL.Repositories;
-public interface IWebRepository<TDetailModel, TListModel>
-    where TDetailModel : IModelBase
-    where TListModel : IModelBase
+public interface IWebRepository
 {
 
 }

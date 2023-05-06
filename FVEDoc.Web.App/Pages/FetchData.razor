@@ -1,7 +1,9 @@
 ﻿@page "/fetchdata"
 @using FVEDoc.Common.Models.Battery;
 @using FVEDoc.Web.DAL.Repositories;
+@using Microsoft.Extensions.Caching.Memory;
 @inject HttpClient Http
+@inject IMemoryCache Chache
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -41,7 +43,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var repo = new RepositoryBase<BatteryModel, BatteryListModel>(Http, "/battery");
-        _batteries = await repo.GetAllAsync();
+
     }
 }
