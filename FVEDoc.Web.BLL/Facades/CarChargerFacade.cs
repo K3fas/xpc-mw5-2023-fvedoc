@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FVEDoc.Common.BL.Facades;
+using FVEDoc.Common.Models.CarCharger;
+using FVEDoc.Web.DAL.Repositories;
+using Microsoft.Extensions.Logging;
+
 
 namespace FVEDoc.Web.BLL.Facades;
-public class CarChargerFacade
+public class CarChargerFacade : FacadeBase<CarChargerModel, CarChargerListModel>, IWebFacade
 {
-
+    public CarChargerFacade(CarChargerRepository repo, ILogger<BatteryFacade> logger)
+        : base(repo, logger)
+    {
+    }
 }
 

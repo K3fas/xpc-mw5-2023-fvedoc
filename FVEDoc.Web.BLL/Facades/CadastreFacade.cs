@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 
 namespace FVEDoc.Web.BLL.Facades;
-public class CadastreFacade : FacadeBase<CadastreDataModel, CadastreDataModel>, IWebFacade
+public class CadastreFacade : FacadeBase<CadastreDataModel, CadastreDataListModel>, IWebFacade
 {
     public CadastreFacade(CadastreRepository repo, ILogger<BatteryFacade> logger)
         : base(repo, logger)
