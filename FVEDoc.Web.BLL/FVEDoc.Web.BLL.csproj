@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FVEDoc.Common.BL\FVEDoc.Common.BL.csproj" />
+    <ProjectReference Include="..\FVEDoc.Web.DAL\FVEDoc.Web.DAL.csproj" />
   </ItemGroup>
 
 </Project>

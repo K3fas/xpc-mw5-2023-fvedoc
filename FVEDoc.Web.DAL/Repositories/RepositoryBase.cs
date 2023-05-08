@@ -3,11 +3,9 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net.Http.Json;
-using System.Reflection;
-using System.Text.Json;
 
 namespace FVEDoc.Web.DAL.Repositories;
-public class RepositoryBase<TDetailModel, TListModel> : IWebRepository
+public class RepositoryBase<TDetailModel, TListModel>
     where TDetailModel : IModelBase
     where TListModel : IModelBase
 {
@@ -15,13 +13,12 @@ public class RepositoryBase<TDetailModel, TListModel> : IWebRepository
     private readonly IMemoryCache _cache;
     private readonly ILogger _logger;
     private readonly string _apiPath;
-    private readonly string _endpoint;
 
 
     public RepositoryBase(HttpClient httpClient, IMemoryCache cache, IConfiguration config, ILogger logger, string endpoint)
     {
         _apiPath = config["ApiPath"] ?? "";
-        _endpoint=endpoint;
+        _apiPath += endpoint;
         _httpClient=httpClient;
         _cache=cache;
         _logger=logger;
@@ -31,7 +28,7 @@ public class RepositoryBase<TDetailModel, TListModel> : IWebRepository
 
     public async Task<Guid> CreateAsync(TDetailModel model, CancellationToken c = default)
     {
-        var response = await _httpClient.PostAsJsonAsync(_apiPath + _endpoint, model, c);
+        var response = await _httpClient.PostAsJsonAsync(_apiPath, model, c);
         response.EnsureSuccessStatusCode();
 
         ClearChache(nameof(TListModel));
@@ -41,50 +38,40 @@ public class RepositoryBase<TDetailModel, TListModel> : IWebRepository
 
     public virtual async Task<List<TListModel>?> GetAllAsync(CancellationToken c = default)
     {
-        if(_cache.TryGetValue(nameof(TListModel), out var output))
+        if (_cache.TryGetValue(nameof(TListModel), out var output))
         {
-            var arr = output as TListModel[];
-
             _logger.LogTrace("Getting {name} from cache", nameof(TListModel));
+
+            var arr = output as TListModel[];
 
             return arr?.ToList();
         }
-        try
-        {
-            var models = await _httpClient.GetFromJsonAsync<TListModel[]>(_apiPath + _endpoint, c);
-            _cache.Set(nameof(TListModel), models, TimeSpan.FromMinutes(5));
 
-            _logger.LogTrace("Getting {name} from api", nameof(TListModel));
+        _logger.LogTrace("Getting {name} from api", nameof(TListModel));
 
-            return models?.ToList();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        var models = await _httpClient.GetFromJsonAsync<TListModel[]>(_apiPath, c);
+        _cache.Set(nameof(TListModel), models, TimeSpan.FromMinutes(5));
 
-        return null;
+        return models?.ToList();
     }
 
     public virtual async Task<TDetailModel?> GetByIdAsync(Guid id, CancellationToken c = default)
     {
-        var response = await _httpClient.GetAsync($"{_endpoint}/{{{id}}}", c);
+        _logger.LogTrace("Getting {name} by {id}", nameof(TDetailModel), id);
+        var response = await _httpClient.GetAsync($"{_apiPath}/{id}", c);
         response.EnsureSuccessStatusCode();
 
-        var stream = await response.Content.ReadAsStreamAsync(c);
-        var model = JsonSerializer.Deserialize<TDetailModel>(stream);
-
-        _logger.LogTrace("Getting {name} by {id}", nameof(TDetailModel), id);
+        var model = await response.Content.ReadFromJsonAsync<TDetailModel>(cancellationToken: c);
 
         return model;
     }
 
     public async Task<Guid> UpdateAsync(TDetailModel model, CancellationToken c = default)
     {
-        var response = await _httpClient.PutAsJsonAsync(_apiPath + _endpoint, model, c);
-        response.EnsureSuccessStatusCode();
-
         _logger.LogTrace("Updating {name} by {id}", nameof(TDetailModel), model.Id);
+
+        var response = await _httpClient.PutAsJsonAsync(_apiPath, model, c);
+        response.EnsureSuccessStatusCode();
 
         ClearChache(nameof(TListModel));
 
@@ -93,10 +80,10 @@ public class RepositoryBase<TDetailModel, TListModel> : IWebRepository
 
     public async Task<Guid> DeleteAsync(Guid id, CancellationToken c = default)
     {
-        var response = await _httpClient.DeleteAsync($"{_apiPath + _endpoint}/{{{id}}}");
-        response.EnsureSuccessStatusCode();
-
         _logger.LogTrace("Deleting {name} by {id}", nameof(TDetailModel), id);
+
+        var response = await _httpClient.DeleteAsync($"{_apiPath}/{id}", c);
+        response.EnsureSuccessStatusCode();
 
         ClearChache(nameof(TListModel));
 

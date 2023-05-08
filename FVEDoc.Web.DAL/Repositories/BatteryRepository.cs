@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 
 namespace FVEDoc.Web.DAL.Repositories;
-public class BatteryRepository : RepositoryBase<BatteryModel, BatteryListModel>
+public class BatteryRepository : RepositoryBase<BatteryModel, BatteryListModel>, IWebRepository
 {
-    public BatteryRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, Logger<BatteryRepository> logger)
+    public BatteryRepository(HttpClient httpClient, IMemoryCache cache, IConfiguration config, ILogger<BatteryRepository> logger)
         :base(httpClient, cache, config, logger, "battery")
     {
 
