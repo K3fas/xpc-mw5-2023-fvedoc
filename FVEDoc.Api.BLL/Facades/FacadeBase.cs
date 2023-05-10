@@ -29,11 +29,11 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
         return await _repository.InsertAsync(entity, c);
     }
 
-    public virtual async Task<Guid?> CreateOrUpdateAsync(TModel model, CancellationToken c = default)
+    public virtual async Task<(Guid? id, bool created)> CreateOrUpdateAsync(TModel model, CancellationToken c = default)
     {
         return await _repository.ExistsAsync(model.Id, c)
-            ? await UpdateAsync(model, c)
-            : await CreateAsync(model, c);
+            ? (await UpdateAsync(model, c), false)
+            : (await CreateAsync(model, c), true);
     }
 
     public virtual async Task<Guid?> DeleteAsync(Guid id, CancellationToken c)
