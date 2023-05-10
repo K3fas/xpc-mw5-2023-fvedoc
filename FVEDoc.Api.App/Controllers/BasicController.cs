@@ -49,7 +49,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
         _logger.LogInformation("Getting all models");
         try
         {
-            var list =  (IEnumerable<IModelBase>)await _facade.GetAllAsync<TModel>();
+            var list = (IEnumerable<IModelBase>)await _facade.GetAllAsync<TModel>();
             return list.Any() ? TypedResults.Ok(list) : TypedResults.NoContent();
         }
         catch (Exception ex)
@@ -83,14 +83,18 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
 
     [HttpPut("", Order = 1)]
     [SwaggerResponse(StatusCodes.Status200OK)]
+    [SwaggerResponse(StatusCodes.Status201Created)]
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
-    public virtual async Task<Results<BadRequest, Ok<Guid>>> UpdateAsync(TModel model)
+    public virtual async Task<Results<BadRequest, Created<Guid>, Ok<Guid>>> UpdateAsync(TModel model)
     {
         _logger.LogInformation("Updating entity {entity}", model.Id);
         try
         {
-            var id = await _facade.CreateOrUpdateAsync(model);
-            return id is null ? TypedResults.BadRequest() : TypedResults.Ok(id.GetValueOrDefault());
+            var (id, created) = await _facade.CreateOrUpdateAsync(model);
+
+            return id is null ? TypedResults.BadRequest() :
+                created ? TypedResults.Created("/"+id, id.GetValueOrDefault())
+                : TypedResults.Ok(model.Id);
 
         }
         catch (Exception ex)
