@@ -1,0 +1,103 @@
+﻿@page "/test"
+
+@using FVEDoc.Common.Enums;
+@using FVEDoc.Common.Models.Battery;
+@using FVEDoc.Common;
+@using FVEDoc.Web.App.Components.Baterry;
+@using FVEDoc.Web.DAL.Repositories;
+@using Microsoft.Extensions.Caching.Memory;
+@inject HttpClient _httpClient;
+@inject IMemoryCache _cache;
+@inject IConfiguration _config;
+@inject BatteryRepository Repo;
+<h3>Test</h3>
+
+<button class="btn btn-primary" @onclick="LoadData">Load data</button>
+<button class="btn btn-primary" @onclick="CreateOne">Create new</button>
+<button class="btn btn-primary" @onclick="DeleteFirst">Delete first</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(_batteries is not null)
+        {
+            @foreach (var battery in _batteries)
+            {
+                <tr onclick="@(() => ProductDetail(battery.Id))">
+                    <td>@battery.Id</td>
+                    <td>@battery.Name</td>
+                    <td>@battery.TotalCapacity</td>
+                </tr>
+                 @if(_selectedBattery is not null && _selectedBattery.Id == battery.Id)
+                 {
+                    <tr>
+                        <td colspan="4">
+                            <BatteryDetail Battery="_selectedBattery"></BatteryDetail>
+                        </td>
+                    </tr>
+                 }
+            }
+        }
+
+    </tbody>
+</table>
+
+@code {
+    private List<BatteryListModel>? _batteries;
+    private BatteryModel? _selectedBattery;
+
+
+    async void LoadData()
+    {
+        _batteries = await Repo.GetAllAsync();
+        StateHasChanged();
+
+    }
+    async void DeleteFirst()
+    {
+        await Repo.DeleteAsync(_batteries.ElementAt(0).Id);
+        _batteries.RemoveAt(0);
+    }
+
+    async void CreateOne()
+    {
+        var batt = new BatteryModel
+            {
+                    Id = Guid.NewGuid(),
+                    Name = "NAME",
+                    TotalCapacity = 69.0,
+                    BlockCount = 3,
+                    BlockCapacity = 69.9,
+                    BlockTechnology = "WASM",
+                    NominalVoltage = 420,
+                    LifeExpectacy = "6000+",
+                    ContinuousCharge = 10,
+                    ContinuousDischarge = 10,
+                Size = new Size { Depth = new UnitType { Unit = Units.mm, Value = 25 }, Width = new UnitType { Unit = Units.mm, Value = 25 }, Height =new UnitType { Unit = Units.mm, Value = 25 } },
+    Weigth = 25,
+    };
+        await Repo.CreateAsync(batt);
+
+    }
+
+    private async void ProductDetail(Guid id)
+    {
+        if(_selectedBattery?.Id == id)
+        {
+            _selectedBattery = null;
+        }
+        else
+        {
+            _selectedBattery = await Repo.GetByIdAsync(id);
+        }
+        StateHasChanged();
+    }
+
+
+}

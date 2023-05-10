@@ -1,0 +1,105 @@
+﻿@using FVEDoc.Common.Models.Battery;
+@using FVEDoc.Web.DAL.Repositories;
+@inject ILogger<BatteryDetail> Logger;
+
+@inject BatteryRepository Repo;
+
+@if(Battery is not null)
+{
+    <div class="baterry-detail-container">
+        <div class="form-group">
+            <p><strong>ID:</strong> @Battery.Id</p>
+        </div>
+
+            <EditForm EditContext="@editContext" OnSubmit="@HandleUpdate">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="form-group">
+                    <label ><strong>Name:</strong></label>
+                    <InputText @bind-Value="@Battery.Name" disabled="@notEditing"></InputText>
+                </div>
+
+            <div class="form-group">
+                <label ><strong>ContinuousCharge:</strong></label>
+                <InputNumber @bind-Value="@Battery.ContinuousCharge" disabled="@notEditing"></InputNumber>
+            </div>
+
+            <div class="form-group">
+                <label ><strong>ContinuousDischarge:</strong></label>
+                <InputNumber @bind-Value="@Battery.ContinuousDischarge" disabled="@notEditing"></InputNumber>
+            </div>
+
+            <div class="form-group">
+                <label><strong>TotalCapacity:</strong></label>
+                <InputNumber @bind-Value="@Battery.TotalCapacity" disabled="@notEditing"></InputNumber>
+            </div>
+
+            <div class="form-group">
+                <label><strong>BlockCapacity:</strong></label>
+                <InputNumber @bind-Value="@Battery.BlockCapacity" disabled="@notEditing"></InputNumber>
+            </div>
+
+            <div class="form-group">
+                <label><strong>BlockCount:</strong></label>
+                <InputNumber @bind-Value="@Battery.BlockCount" disabled="@notEditing"></InputNumber>
+            </div>
+
+            <div class="form-group">
+                <label><strong>BlockTechnology:</strong></label>
+                <InputText @bind-Value="@Battery.BlockTechnology" disabled="@notEditing"></InputText>
+            </div>
+
+            <div class="form-group">
+                <label><strong>LifeExpectacy:</strong></label>
+                <InputText @bind-Value="@Battery.LifeExpectacy" disabled="@notEditing"></InputText>
+            </div>
+            @if (editing)
+            {
+                <div><button type="submit" class="btn btn-success">Save</button></div>
+            }
+            else
+            {
+                <div><button type="button" class="btn btn-outline-success" disabled>Save</button></div>
+            }
+            <div><button type="button" class="btn btn-primary" onclick="@(() => ChangeEdit())">Edit</button></div>
+            </EditForm>
+
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public BatteryModel? Battery { get; set; }
+    private bool editing = false;
+    private bool notEditing => !editing;
+    private EditContext? editContext;
+
+    void ChangeEdit()
+    {
+        editing = !editing;
+        StateHasChanged();
+    }
+
+    async void HandleUpdate()
+    {
+        if (editContext != null && editContext.Validate())
+        {
+            Logger.LogInformation("HandleUpdate called: Form is valid");
+
+            editing = false;
+            // Update the model
+            await Repo.UpdateAsync(Battery!);
+        }
+        else
+        {
+            Logger.LogInformation("HandleUpdate called: Form is INVALID");
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        editContext = new(Battery!);
+    }
+}
