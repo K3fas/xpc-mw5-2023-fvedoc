@@ -14,7 +14,7 @@ public class InstallationInfoMapperProfile : Profile
         CreateMap<InstallationInfoModel, InstallationInfoEntity>()
             .ForMember(dest => dest.DateCreated, src => src.Ignore())
             .ForMember(dest => dest.DateModified, src => src.Ignore())
-            .ForMember(dest => dest.InstallationType, src => src.Ignore());
+            .ForMember(dest => dest.InstallationType, src => src.MapFrom(x => x.InstallationType.Id));
     }
 }
 

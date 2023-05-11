@@ -1,6 +1,10 @@
 ﻿
 using Bogus;
+using FVEDoc.Api.DAL.Mongo.Serializers;
 using FVEDoc.Common.Models;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 using NUnit.Framework;
 using System.Net;
 using System.Net.Http.Json;
@@ -39,6 +43,10 @@ public class TestBase<TDetailModel, TListModel> : IAsyncDisposable
         response = await _client.Value.PostAsJsonAsync(_route, model);
         Assert.False(response.IsSuccessStatusCode);
         Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+
+        response = await _client.Value.DeleteAsync(_route+$"/{model.Id}");
+        Assert.True(response.IsSuccessStatusCode);
+
     }
 
     [Test]
@@ -67,6 +75,9 @@ public class TestBase<TDetailModel, TListModel> : IAsyncDisposable
         response = await _client.Value.GetAsync(_route+$"/{Guid.NewGuid()}");
         Assert.False(response.IsSuccessStatusCode);
         Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+
+        response = await _client.Value.DeleteAsync(_route+$"/{model.Id}");
+        Assert.True(response.IsSuccessStatusCode);
     }
 
     [Test]
@@ -82,6 +93,10 @@ public class TestBase<TDetailModel, TListModel> : IAsyncDisposable
         response = await _client.Value.PutAsJsonAsync(_route, model);
         Assert.True(response.IsSuccessStatusCode);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+        await _client.Value.DeleteAsync(_route+$"/{model.Id}");
+        Assert.True(response.IsSuccessStatusCode);
+
     }
 
     [Test]
