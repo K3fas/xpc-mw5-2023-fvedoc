@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mongo.Repositories;
 public class InstallationTypeRepository : RepositoryBase<InstallationTypeEntity>, IInstallationTypeRepository
 {
     public InstallationTypeRepository(MongoDbContext mongo)
-        :base(mongo.GetCollection<InstallationTypeEntity>("installation-types"))
+        : base(mongo.GetCollection<InstallationTypeEntity>("installation-types"))
     {
     }
 }

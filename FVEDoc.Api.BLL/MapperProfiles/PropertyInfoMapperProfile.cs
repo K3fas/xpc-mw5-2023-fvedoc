@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using FVEDoc.Api.DAL.Common.Entities;
-using FVEDoc.Api.DAL.Common.Entities.Interfaces;
 using FVEDoc.Common.Models.PropertyInfo;
-using static MongoDB.Driver.WriteConcern;
 
 namespace FVEDoc.Api.BLL.MapperProfiles;
 public class PropertyInfoMapperProfile : Profile

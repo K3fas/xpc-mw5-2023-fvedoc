@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mongo.Repositories;
 public class InverterRepository : RepositoryBase<InverterEntity>, IInverterRepository
 {
     public InverterRepository(MongoDbContext mongo)
-        :base(mongo.GetCollection<InverterEntity>("inverters"))
+        : base(mongo.GetCollection<InverterEntity>("inverters"))
     {
     }
 }

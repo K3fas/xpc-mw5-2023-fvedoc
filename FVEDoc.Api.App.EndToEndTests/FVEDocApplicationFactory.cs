@@ -1,10 +1,6 @@
-﻿using FVEDoc.Api.DAL.Mongo.Serializers;
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Bson.Serialization;
 using System.Reflection;
 
 namespace FVEDoc.Api.App.EndToEndTests;

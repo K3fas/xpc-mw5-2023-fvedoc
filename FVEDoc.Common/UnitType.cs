@@ -1,5 +1,4 @@
 ﻿using FVEDoc.Common.Enums;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace FVEDoc.Common;
 public struct UnitType

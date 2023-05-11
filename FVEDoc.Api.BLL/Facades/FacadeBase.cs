@@ -53,7 +53,7 @@ public abstract class FacadeBase<TEntity, TModel> : IFacadeBase<TEntity, TModel>
 
     virtual public async Task<Guid?> UpdateAsync(TModel model, CancellationToken c = default)
     {
-        if (! await _repository.ExistsAsync(model.Id, c))
+        if (!await _repository.ExistsAsync(model.Id, c))
             return null;
 
         var entity = _mapper.Map<TEntity>(model);

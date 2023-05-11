@@ -28,16 +28,8 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
 
     public virtual async Task<IList<T>> GetAllAsync(CancellationToken c = default)
     {
-        try
-        {
-            var cursor = await _collection.FindAsync(new BsonDocument(), cancellationToken: c);
-            return await cursor.ToListAsync(c);
-        }
-        catch (Exception ex)
-        {
-
-            throw;
-        }
+        var cursor = await _collection.FindAsync(new BsonDocument(), cancellationToken: c);
+        return await cursor.ToListAsync(c);
     }
 
     public virtual async Task<T?> GetByIdAsync(Guid id, CancellationToken c = default)
@@ -45,7 +37,7 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
         var filter = Builders<T>.Filter.Eq(x => x.Id, id);
         var cursor = await _collection.FindAsync(filter, cancellationToken: c);
         return await cursor.FirstOrDefaultAsync(c);
-     }
+    }
 
     public virtual async Task<Guid> InsertAsync(T entity, CancellationToken c = default)
     {

@@ -1,6 +1,4 @@
-﻿using MongoDB.Driver;
-
-namespace FVEDoc.Api.DAL.Common.Entities;
+﻿namespace FVEDoc.Api.DAL.Common.Entities;
 public class InstallationInfoEntity : EntityBase
 {
     public Guid? InstallationType { get; set; }

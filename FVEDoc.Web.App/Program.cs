@@ -1,5 +1,4 @@
 using FVEDoc.Web.App;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -14,7 +13,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "allcors",
                       policy =>
-                      { policy.AllowAnyOrigin()
+                      {
+                          policy.AllowAnyOrigin()
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                       });

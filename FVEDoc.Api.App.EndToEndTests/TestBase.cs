@@ -1,10 +1,6 @@
 ﻿
 using Bogus;
-using FVEDoc.Api.DAL.Mongo.Serializers;
 using FVEDoc.Common.Models;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
 using NUnit.Framework;
 using System.Net;
 using System.Net.Http.Json;

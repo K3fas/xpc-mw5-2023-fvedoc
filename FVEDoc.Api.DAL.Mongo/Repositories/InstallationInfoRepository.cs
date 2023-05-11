@@ -1,6 +1,5 @@
 ﻿using FVEDoc.Api.DAL.Common.Entities;
 using FVEDoc.Api.DAL.Common.Repositories;
-using MongoDB.Driver;
 
 namespace FVEDoc.Api.DAL.Mongo.Repositories;
 public class InstallationInfoRepository : RepositoryBase<InstallationInfoEntity>, IInstallationInfoRepository
@@ -8,7 +7,7 @@ public class InstallationInfoRepository : RepositoryBase<InstallationInfoEntity>
 
 
     public InstallationInfoRepository(MongoDbContext mongo)
-        :base(mongo.GetCollection<InstallationInfoEntity>("installation-info"))
+        : base(mongo.GetCollection<InstallationInfoEntity>("installation-info"))
     {
 
     }

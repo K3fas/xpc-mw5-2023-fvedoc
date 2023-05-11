@@ -1,7 +1,6 @@
 using AutoMapper;
 using FVEDoc.Api.BLL.Installers;
 using FVEDoc.Api.DAL.Common.Entities;
-using FVEDoc.Api.DAL.Mock.Installers;
 using FVEDoc.Api.DAL.Mongo.Installers;
 using FVEDoc.Common.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;

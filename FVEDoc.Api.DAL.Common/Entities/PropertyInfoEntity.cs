@@ -1,5 +1,5 @@
 ﻿namespace FVEDoc.Api.DAL.Common.Entities;
-public class PropertyInfoEntity :EntityBase
+public class PropertyInfoEntity : EntityBase
 {
     public Guid? CadastreData { get; set; }
     public int? MainCB { get; set; }

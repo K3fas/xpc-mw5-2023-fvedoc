@@ -1,9 +1,9 @@
 ﻿namespace FVEDoc.Common.Enums;
 public enum Units
 {
-    None =0,
-    mm =1,
-    m =2,
+    None = 0,
+    mm = 1,
+    m = 2,
     kg = 3,
     W = 4,
     kW = 5,

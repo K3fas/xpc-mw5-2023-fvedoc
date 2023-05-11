@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mongo.Repositories;
 public class OrderRepository : RepositoryBase<OrderEntity>, IOrderRepository
 {
     public OrderRepository(MongoDbContext mongo)
-        :base(mongo.GetCollection<OrderEntity>("orders"))
+        : base(mongo.GetCollection<OrderEntity>("orders"))
     {
     }
 }

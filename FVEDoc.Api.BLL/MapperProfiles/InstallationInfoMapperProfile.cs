@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FVEDoc.Api.DAL.Common.Entities;
-using FVEDoc.Api.DAL.Common.Entities.Interfaces;
 using FVEDoc.Common.Models.InstallationInfo;
 
 namespace FVEDoc.Api.BLL.MapperProfiles;

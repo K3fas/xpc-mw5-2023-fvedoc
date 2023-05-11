@@ -9,12 +9,12 @@ namespace FVEDoc.Api.App.Controllers;
 
 [ApiController]
 [Route("battery")]
-public class BatteryControler :  BasicController<BatteryEntity, BatteryModel>
+public class BatteryControler : BasicController<BatteryEntity, BatteryModel>
 {
     private readonly ILogger<BatteryControler> _logger;
 
     public BatteryControler(ILogger<BatteryControler> logger, IBatteryFacade battery)
-        :base(logger, battery)
+        : base(logger, battery)
     {
         _logger=logger;
     }

@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class CarChargerRepository : RepositoryBase<CarChargerEntity>, ICarChargerRepository
 {
     public CarChargerRepository(MockDb bogus)
-        :base(bogus.CarChargers)
+        : base(bogus.CarChargers)
     {
     }
 }

@@ -2,8 +2,6 @@
 using FVEDoc.Api.BLL.Facades.Interfaces;
 using FVEDoc.Api.DAL.Common.Entities;
 using FVEDoc.Api.DAL.Common.Repositories;
-using FVEDoc.Common.BL.Facades;
-using FVEDoc.Common.Models.InstallationInfo;
 using FVEDoc.Common.Models.InstallationType;
 
 namespace FVEDoc.Api.BLL.Facades;
