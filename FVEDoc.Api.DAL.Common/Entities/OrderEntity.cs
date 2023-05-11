@@ -2,6 +2,6 @@
 public class OrderEntity : EntityBase
 {
     public int OrderId { get; set; }
-    public InstallationTypeEntity? InstallationType { get; set; }
+    public Guid? InstallationType { get; set; }
 }
 
