@@ -1,6 +1,7 @@
 using AutoMapper;
 using FVEDoc.Api.BLL.Installers;
 using FVEDoc.Api.DAL.Common.Entities;
+using FVEDoc.Api.DAL.Mock.Installers;
 using FVEDoc.Api.DAL.Mongo.Installers;
 using FVEDoc.Common.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -77,8 +78,14 @@ app.Run();
 
 void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
 {
-    //services.AddInstaller<ApiDALMockInstaller>();
-    services.AddInstaller<ApiDALMongoInstaller>();
+    if (args[0] == "mock")
+    {
+        services.AddInstaller<ApiDALMockInstaller>();
+    }
+    else
+    {
+        services.AddInstaller<ApiDALMongoInstaller>();
+    }
     services.AddInstaller<ApiBLLInstaller>();
 }
 
