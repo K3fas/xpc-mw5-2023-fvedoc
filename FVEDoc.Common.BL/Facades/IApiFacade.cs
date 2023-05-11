@@ -1,6 +1,4 @@
-﻿using FVEDoc.Common.Models;
-
-namespace FVEDoc.Common.BL.Facades;
+﻿namespace FVEDoc.Common.BL.Facades;
 public interface IApiFacade
 {
     //Task<List<TListModel>> GetAllAsync<TListModel>(CancellationToken c = default) where TListModel : IModelBase;

@@ -4,8 +4,6 @@ using FVEDoc.Api.DAL.Common.Entities;
 using FVEDoc.Api.DAL.Common.Repositories;
 using FVEDoc.Common.Models.InstallationInfo;
 using FVEDoc.Common.Models.InstallationType;
-using MongoDB.Bson;
-using MongoDB.Driver;
 
 namespace FVEDoc.Api.BLL.Facades;
 public class InstallationInfoFacade : FacadeBase<InstallationInfoEntity, InstallationInfoModel>, IInstallationInfoFacade

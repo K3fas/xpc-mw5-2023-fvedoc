@@ -11,6 +11,7 @@ public class FacadeBase<TDetailModel, TListModel>: IWebFacade
     private readonly RepositoryBase<TDetailModel, TListModel> _repo;
     private readonly ILogger _logger;
 
+
     public FacadeBase(RepositoryBase<TDetailModel, TListModel> repo, ILogger logger)
     {
         _repo=repo;

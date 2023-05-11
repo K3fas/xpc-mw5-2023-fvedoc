@@ -1,10 +1,10 @@
 ﻿using FVEDoc.Api.DAL.Common.Repositories;
+using FVEDoc.Api.DAL.Mongo.Serializers;
 using FVEDoc.Common.Installers;
 using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Bson.Serialization;
 using MongoDB.Bson;
-using FVEDoc.Api.DAL.Mongo.Serializers;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace FVEDoc.Api.DAL.Mongo.Installers;
 public class ApiDALMongoInstaller : IInstaller

@@ -10,8 +10,6 @@ using FVEDoc.Common.Models.Inverter;
 using FVEDoc.Common.Models.Order;
 using FVEDoc.Common.Models.PropertyInfo;
 using FVEDoc.Common.Models.PVPanel;
-using MongoDB.Bson;
-using MongoDB.Driver;
 
 namespace FVEDoc.Api.DAL.Mock;
 public static class BogusSeeder
@@ -195,7 +193,7 @@ public static class BogusSeeder
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
             .RuleFor(x => x.CYADiameter, x => x.Random.Int(8, 16))
-            .RuleFor(x => x.InstallationType, x => x.PickRandom( _db.InstallationTypes.Select(x => x.Id)))
+            .RuleFor(x => x.InstallationType, x => x.PickRandom(_db.InstallationTypes.Select(x => x.Id)))
             .RuleFor(x => x.PVStrings, x => x.Random.ListItems(new List<int> { 8, 9, 10, 11, 12, 13, 14 }, 2))
             .RuleFor(x => x.SolarCable, x => "EUCASOLAR")
             .RuleFor(x => x.TechnologyPlace, x => x.PickRandom(_places));

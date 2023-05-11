@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class BatteryRepository : RepositoryBase<BatteryEntity>, IBatteryRepository
 {
     public BatteryRepository(MockDb bogus)
-        :base(bogus.Batteries)
+        : base(bogus.Batteries)
     {
     }
 }

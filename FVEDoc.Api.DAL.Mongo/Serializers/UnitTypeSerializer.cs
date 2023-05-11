@@ -10,7 +10,7 @@ public class UnitTypeSerializer : SerializerBase<UnitType>
 {
     public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, UnitType value)
     {
-        context.Writer.WriteDouble(nameof(value.Value),value.Value);
+        context.Writer.WriteDouble(nameof(value.Value), value.Value);
         context.Writer.WriteInt32(nameof(value.Unit), (int)value.Unit);
     }
     public override UnitType Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)

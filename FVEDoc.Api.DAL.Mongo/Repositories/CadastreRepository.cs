@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mongo.Repositories;
 public class CadastreRepository : RepositoryBase<CadastreDataEntity>, ICadastreRepository
 {
     public CadastreRepository(MongoDbContext mongo)
-        :base(mongo.GetCollection<CadastreDataEntity>("cadastre-data"))
+        : base(mongo.GetCollection<CadastreDataEntity>("cadastre-data"))
     {
     }
 }

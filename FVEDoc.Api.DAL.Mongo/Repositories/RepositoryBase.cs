@@ -28,7 +28,6 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
 
     public virtual async Task<IList<T>> GetAllAsync(CancellationToken c = default)
     {
-
         var cursor = await _collection.FindAsync(new BsonDocument(), cancellationToken: c);
         return await cursor.ToListAsync(c);
     }

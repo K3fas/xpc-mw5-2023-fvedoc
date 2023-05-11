@@ -2,7 +2,6 @@
 using FVEDoc.Api.BLL.Facades.Interfaces;
 using FVEDoc.Api.DAL.Common.Entities;
 using FVEDoc.Api.DAL.Common.Repositories;
-using FVEDoc.Common.BL.Facades;
 using FVEDoc.Common.Models.PropertyInfo;
 
 namespace FVEDoc.Api.BLL.Facades;
@@ -19,7 +18,7 @@ public class PropertyInfoFacade : FacadeBase<PropertyInfoEntity, PropertyInfoMod
     public override async Task<PropertyInfoModel?> GetByIdAsync(Guid id, CancellationToken c = default)
     {
         var entity = await _repository.GetByIdAsync(id, c);
-        if(entity is null)
+        if (entity is null)
             return null;
 
         var model = _mapper.Map<PropertyInfoModel>(entity);
