@@ -8,6 +8,7 @@ public class FVEDocApplicationFactory : WebApplicationFactory<Program>
 {
     protected override IHost CreateHost(IHostBuilder builder)
     {
+        builder.UseEnvironment("IntegrationTesting");
         builder.ConfigureServices(collecion =>
         {
             var assemblyName = typeof(Program).Assembly.FullName;
