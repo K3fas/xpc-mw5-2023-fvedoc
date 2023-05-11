@@ -15,21 +15,18 @@ public class PropertyInfoFacade : FacadeBase<PropertyInfoEntity, PropertyInfoMod
     {
         _cadastreFacade=cadastreFacade;
     }
-    public override async Task<Guid?> CreateAsync(PropertyInfoModel model, CancellationToken c = default)
+
+    public override async Task<PropertyInfoModel?> GetByIdAsync(Guid id, CancellationToken c = default)
     {
-        if (await _repository.ExistsAsync(model.Id))
-            return model.Id;
+        var entity = await _repository.GetByIdAsync(id, c);
+        if(entity is null)
+            return null;
 
-        var entity = _mapper.Map<PropertyInfoEntity>(model);
-        entity.DateCreated = DateTimeOffset.UtcNow;
+        var model = _mapper.Map<PropertyInfoModel>(entity);
+        model.CadastreData = await _cadastreFacade.GetByIdAsync(entity.CadastreData.GetValueOrDefault(), c);
 
-        // Try to insert new cadastre data
-        if(model.CadastreData is not null)
-        {
-            await _cadastreFacade.CreateOrUpdateAsync(model.CadastreData);
-        }
-
-        return await _repository.InsertAsync(entity);
+        return model;
     }
+
 }
 

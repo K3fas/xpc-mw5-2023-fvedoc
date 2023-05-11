@@ -10,6 +10,8 @@ using FVEDoc.Common.Models.Inverter;
 using FVEDoc.Common.Models.Order;
 using FVEDoc.Common.Models.PropertyInfo;
 using FVEDoc.Common.Models.PVPanel;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace FVEDoc.Api.DAL.Mock;
 public static class BogusSeeder
@@ -150,7 +152,7 @@ public static class BogusSeeder
 
     }
 
-    private static Faker<CustomerEntity> SeedCustomer()
+    public static Faker<CustomerEntity> SeedCustomer()
     {
         return new Faker<CustomerEntity>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
@@ -163,7 +165,7 @@ public static class BogusSeeder
             .RuleFor(x => x.ZIP, x => x.Address.ZipCode());
     }
 
-    private static Faker<CustomerModel> SeedCustomerModel()
+    public static Faker<CustomerModel> SeedCustomerModel()
     {
         return new Faker<CustomerModel>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
@@ -193,7 +195,7 @@ public static class BogusSeeder
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
             .RuleFor(x => x.CYADiameter, x => x.Random.Int(8, 16))
-            .RuleFor(x => x.InstallationType, x => x.PickRandom(_db.InstallationTypes))
+            .RuleFor(x => x.InstallationType, x => x.PickRandom( _db.InstallationTypes.Select(x => x.Id)))
             .RuleFor(x => x.PVStrings, x => x.Random.ListItems(new List<int> { 8, 9, 10, 11, 12, 13, 14 }, 2))
             .RuleFor(x => x.SolarCable, x => "EUCASOLAR")
             .RuleFor(x => x.TechnologyPlace, x => x.PickRandom(_places));
@@ -203,6 +205,7 @@ public static class BogusSeeder
     {
         return new Faker<InstallationInfoModel>()
             .RuleFor(x => x.Id, x => x.Random.Guid())
+            .RuleFor(x => x.InstallationType, x => SeedInstallationTypeModel().Generate())
             .RuleFor(x => x.CYADiameter, x => x.Random.Int(8, 16))
             .RuleFor(x => x.PVStrings, x => x.Random.ListItems(new List<int> { 8, 9, 10, 11, 12, 13, 14 }, 2))
             .RuleFor(x => x.SolarCable, x => "EUCASOLAR")
@@ -227,11 +230,11 @@ public static class BogusSeeder
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
-            .RuleFor(x => x.Battery, x => x.PickRandom(_db.Batteries))
-            .RuleFor(x => x.CarCharger, x => x.PickRandom(_db.CarChargers))
-            .RuleFor(x => x.Inverter, x => x.PickRandom(_db.Inverters))
+            .RuleFor(x => x.Battery, x => x.PickRandom(_db.Batteries.Select(x => x.Id)))
+            .RuleFor(x => x.CarCharger, x => x.PickRandom(_db.CarChargers.Select(x => x.Id)))
+            .RuleFor(x => x.Inverter, x => x.PickRandom(_db.Inverters.Select(x => x.Id)))
             .RuleFor(x => x.Power, x => x.Random.Double(6, 9.99))
-            .RuleFor(x => x.PVPanel, x => x.PickRandom(_db.PVPanels))
+            .RuleFor(x => x.PVPanel, x => x.PickRandom(_db.PVPanels.Select(x => x.Id)))
             .RuleFor(x => x.PVPanelCount, x => x.Random.Int(16, 24))
             .RuleFor(x => x.PVTypeID, x => x.Random.ListItem(new List<string> { "Aa1", "B", "C1", "Ca1" }));
     }
@@ -306,7 +309,7 @@ public static class BogusSeeder
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
-            .RuleFor(x => x.InstallationType, x => x.PickRandom(_db.InstallationTypes))
+            .RuleFor(x => x.InstallationType, x => x.PickRandom(_db.InstallationTypes.Select(x => x.Id)))
             .RuleFor(x => x.OrderId, x => x.Random.Int(0, 900));
     }
 
@@ -335,7 +338,7 @@ public static class BogusSeeder
             .RuleFor(x => x.Id, x => x.Random.Guid())
             .RuleFor(x => x.DateModified, x => x.Date.Recent())
             .RuleFor(x => x.DateCreated, x => x.Date.Recent())
-            .RuleFor(x => x.CadastreData, x => x.PickRandom(_db.CadastreData))
+            .RuleFor(x => x.CadastreData, x => x.PickRandom(_db.CadastreData.Select(x => x.Id)))
             .RuleFor(x => x.MainCB, x => x.PickRandom(new List<int> { 25, 30, 35, 40 }))
             .RuleFor(x => x.MainCBPlace, x => x.PickRandom(_places))
             .RuleFor(x => x.MainHeating, x => x.PickRandom(new List<string> { "Electric boiler", "Solid fuels", "Gas boiler", "Heat pump" }))

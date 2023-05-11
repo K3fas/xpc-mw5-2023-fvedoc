@@ -3,10 +3,10 @@ public class InstallationTypeEntity : EntityBase
 {
     public required string PVTypeID { get; set; }
     public required double Power { get; set; }
-    public required InverterEntity Inverter { get; set; }
-    public required PVPanelEntity PVPanel { get; set; }
+    public required Guid Inverter { get; set; }
+    public required Guid PVPanel { get; set; }
     public required int PVPanelCount { get; set; }
-    public BatteryEntity? Battery { get; set; }
-    public CarChargerEntity? CarCharger { get; set; }
+    public Guid? Battery { get; set; }
+    public Guid? CarCharger { get; set; }
 }
 

@@ -9,15 +9,19 @@ using FVEDoc.Api.DAL.Mongo.Serializers;
 namespace FVEDoc.Api.DAL.Mongo.Installers;
 public class ApiDALMongoInstaller : IInstaller
 {
+    static bool guidSetup = false;
     public void Install(IServiceCollection serviceCollection)
     {
         // Mongo
-        BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
-        BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
-        BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));     // needs to be initialized before MongoDB
-        BsonSerializer.RegisterSerializer(new SizeSerializer());
-        BsonSerializer.RegisterSerializer(new UnitTypeSerializer());
-
+        if (guidSetup is false)
+        {
+            BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
+            BsonDefaults.GuidRepresentationMode = GuidRepresentationMode.V3;
+            BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));     // needs to be initialized before MongoDB
+            BsonSerializer.RegisterSerializer(new SizeSerializer());
+            BsonSerializer.RegisterSerializer(new UnitTypeSerializer());
+            guidSetup = true;
+        }
 
         // Scrutor
         serviceCollection.Scan(selector =>

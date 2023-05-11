@@ -78,8 +78,8 @@ app.Run();
 
 void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
 {
-    services.AddInstaller<ApiDALMockInstaller>();
-    //services.AddInstaller<ApiDALMongoInstaller>();
+    //services.AddInstaller<ApiDALMockInstaller>();
+    services.AddInstaller<ApiDALMongoInstaller>();
     services.AddInstaller<ApiBLLInstaller>();
 }
 
