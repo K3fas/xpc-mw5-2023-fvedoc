@@ -22,12 +22,3 @@ jobs:
       - name: Build app
         id: netbuild
         run: dotnet build -c Release --no-restore
-        
-      - name: Create Check
-        if: always()
-        uses: dflydev/check-runs-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          id: netbuild
-          conclusion: ${{ steps.netbuild.outcome }}
-     
