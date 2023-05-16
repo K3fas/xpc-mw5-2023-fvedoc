@@ -22,27 +22,7 @@ jobs:
       - name: Build app
         id: netbuild
         run: dotnet build -c Release --no-restore
-        
-      - name: Create Check
-      - uses: LouisBrunner/checks-action@v1.6.0
-        if: always()
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Build
-          conclusion: ${{ job.status }}
-          output: |
-            {"summary":"${{ steps.netbuild.outputs.summary }}"}
-
-      - name: Create Check
-      - uses: LouisBrunner/checks-action@v1.6.0
-        if: always()
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Build
-          conclusion: ${{ job.status }}
-          output: |
-            {"summary":"${{ steps.netbuild.outputs.summary }}"}
-
+      
   test:
     runs-on: ubuntu-latest
     steps:
@@ -62,14 +42,4 @@ jobs:
       - name: Test app
         id: nettest
         run: dotnet test
-
-      - name: Create Check
-      - uses: LouisBrunner/checks-action@v1.6.0
-        if: always()
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Test
-          conclusion: ${{ job.status }}
-          output: |
-            {"summary":"${{ steps.nettest.outputs.summary }}"}
 
