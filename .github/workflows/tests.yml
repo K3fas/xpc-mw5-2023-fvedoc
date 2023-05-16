@@ -21,6 +21,8 @@ jobs:
 
       - name: Build app
         run: dotnet build -c Release --no-restore
-
+  test:
+    runs-on: ubuntu-latest
+    steps:
       - name: Test app
         run: dotnet test
