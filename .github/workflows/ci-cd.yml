@@ -1,9 +1,9 @@
-name: CI FVEDoc
+name: On Push Build
 
 on:
   push:
     branches-ignore:
-      - master
+      - main
 
 jobs:
   build:
@@ -21,3 +21,21 @@ jobs:
 
       - name: Build app
         run: dotnet build -c Release --no-restore
+        
+      - name: Create Check Run Build
+        id: create_check
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const { data: checkRun } = await github.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head_sha: context.sha,
+              name: 'Build Check',
+              status: 'completed',
+              conclusion: 'success',
+              output: {
+                title: 'Build Status',
+                summary: 'Build passed successfully!'
+            });
+            console.log(`Check Run created: ${checkRun.html_url}`);
