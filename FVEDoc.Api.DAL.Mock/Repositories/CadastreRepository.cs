@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class CadastreRepository : RepositoryBase<CadastreDataEntity>, ICadastreRepository
 {
     public CadastreRepository(MockDb bogus)
-        :base(bogus.CadastreData)
+        : base(bogus.CadastreData)
     {
     }
 }

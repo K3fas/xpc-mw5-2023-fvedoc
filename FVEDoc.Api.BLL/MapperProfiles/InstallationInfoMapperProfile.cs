@@ -1,11 +1,19 @@
-﻿using FVEDoc.Api.DAL.Common.Entities;
+﻿using AutoMapper;
+using FVEDoc.Api.DAL.Common.Entities;
 using FVEDoc.Common.Models.InstallationInfo;
 
 namespace FVEDoc.Api.BLL.MapperProfiles;
-public class InstallationInfoMapperProfile : MapperBase<InstallationInfoEntity, InstallationInfoModel>
+public class InstallationInfoMapperProfile : Profile
 {
     public InstallationInfoMapperProfile()
     {
+        CreateMap<InstallationInfoEntity, InstallationInfoModel>()
+            .ForMember(dest => dest.InstallationType, src => src.Ignore());
+
+        CreateMap<InstallationInfoModel, InstallationInfoEntity>()
+            .ForMember(dest => dest.DateCreated, src => src.Ignore())
+            .ForMember(dest => dest.DateModified, src => src.Ignore())
+            .ForMember(dest => dest.InstallationType, src => src.MapFrom(x => x.InstallationType.Id));
     }
 }
 

@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class InstallationTypeRepository : RepositoryBase<InstallationTypeEntity>, IInstallationTypeRepository
 {
     public InstallationTypeRepository(MockDb bogus)
-        :base(bogus.InstallationTypes)
+        : base(bogus.InstallationTypes)
     {
     }
 }

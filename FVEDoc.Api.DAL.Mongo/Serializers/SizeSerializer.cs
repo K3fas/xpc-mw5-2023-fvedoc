@@ -12,15 +12,15 @@ public class SizeSerializer : SerializerBase<Size>
         context.Writer.WriteStartDocument();
 
         context.Writer.WriteStartDocument(nameof(value.Height));
-        BsonSerializer.Serialize(context.Writer,value.Height);
+        BsonSerializer.Serialize(context.Writer, value.Height);
         context.Writer.WriteEndDocument();
 
         context.Writer.WriteStartDocument(nameof(value.Width));
-        BsonSerializer.Serialize(context.Writer,value.Width);
+        BsonSerializer.Serialize(context.Writer, value.Width);
         context.Writer.WriteEndDocument();
 
         context.Writer.WriteStartDocument(nameof(value.Depth));
-        BsonSerializer.Serialize(context.Writer,value.Depth);
+        BsonSerializer.Serialize(context.Writer, value.Depth);
         context.Writer.WriteEndDocument();
 
         context.Writer.WriteEndDocument();
@@ -32,7 +32,7 @@ public class SizeSerializer : SerializerBase<Size>
         Size result = new();
         var reader = context.Reader;
 
-        if(reader.State == BsonReaderState.Value)
+        if (reader.State == BsonReaderState.Value)
         {
             reader.ReadStartDocument();
 

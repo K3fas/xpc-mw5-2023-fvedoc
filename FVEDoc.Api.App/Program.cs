@@ -5,99 +5,114 @@ using FVEDoc.Api.DAL.Mock.Installers;
 using FVEDoc.Api.DAL.Mongo.Installers;
 using FVEDoc.Common.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Create config
-
-var configuration = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json", optional: false)
-    .AddUserSecrets<Program>()
-    .Build();
-
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+// Make the implicit Program class public so test projects can access it
+namespace FVEDoc.Api.App;
+public partial class Program
 {
-    c.ResolveConflictingActions(apiDescriptions =>
+    private static void Main(string[] args)
     {
-        int best_order = int.MaxValue;
-        ApiDescription? best_descr = null;
-        foreach (var curr_descr in apiDescriptions)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Create config
+
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: false)
+            .AddUserSecrets<Program>()
+            .Build();
+
+
+        // Add services to the container.
+
+        builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(c =>
         {
-            int curr_order = curr_descr.ActionDescriptor.AttributeRouteInfo?.Order ?? 0;
-            if (curr_order < best_order)
+            c.ResolveConflictingActions(apiDescriptions =>
             {
-                best_descr = curr_descr;
-                best_order = curr_order;
+                int best_order = int.MaxValue;
+                ApiDescription? best_descr = null;
+                foreach (var curr_descr in apiDescriptions)
+                {
+                    int curr_order = curr_descr.ActionDescriptor.AttributeRouteInfo?.Order ?? 0;
+                    if (curr_order < best_order)
+                    {
+                        best_descr = curr_descr;
+                        best_order = curr_order;
+                    }
+                }
+                return best_descr;
+            });
+        });
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: "allcors",
+                              policy =>
+                              {
+                                  policy.AllowAnyOrigin()
+                                  .AllowAnyHeader()
+                                  .AllowAnyMethod();
+                              });
+        });
+
+        ConfigureAutoMapper(builder.Services);
+        ConfigureDependencies(builder.Services, builder.Configuration);
+
+        var app = builder.Build();
+
+        ValidateAutomapper(app.Services);
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseCors("allcors");
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
+
+
+        void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
+        {
+            if (args[0] is not null && args[0] == "mock" ||
+                builder.Environment.IsEnvironment("IntegrationTesting"))
+            {
+                services.AddInstaller<ApiDALMockInstaller>();
+            }
+            else
+            {
+                services.AddInstaller<ApiDALMongoInstaller>();
+            }
+            services.AddInstaller<ApiBLLInstaller>();
+        }
+
+        void ConfigureAutoMapper(IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(EntityBase), typeof(ApiBLLInstaller));
+        }
+
+        void ValidateAutomapper(IServiceProvider services)
+        {
+            var mapper = services.GetRequiredService<IMapper>();
+            try
+            {
+                mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
             }
         }
-        return best_descr;
-    });
-});
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "allcors",
-                      policy =>
-                      {
-                          policy.AllowAnyOrigin()
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
-                      });
-});
-
-ConfigureAutoMapper(builder.Services);
-ConfigureDependencies(builder.Services, builder.Configuration);
-
-var app = builder.Build();
-
-ValidateAutomapper(app.Services);
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseCors("allcors");
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-
-
-void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
-{
-    services.AddInstaller<ApiDALMockInstaller>();
-    //services.AddInstaller<ApiDALMongoInstaller>();
-    services.AddInstaller<ApiBLLInstaller>();
-}
-
-void ConfigureAutoMapper(IServiceCollection services)
-{
-    services.AddAutoMapper(typeof(EntityBase), typeof(ApiBLLInstaller));
-}
-
-void ValidateAutomapper(IServiceProvider services)
-{
-    var mapper = services.GetRequiredService<IMapper>();
-    try
-    {
-        mapper.ConfigurationProvider.AssertConfigurationIsValid();
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-        throw;
     }
 }
+

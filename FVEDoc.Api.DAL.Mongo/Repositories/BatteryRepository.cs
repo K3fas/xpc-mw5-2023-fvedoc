@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mongo.Repositories;
 public class BatteryRepository : RepositoryBase<BatteryEntity>, IBatteryRepository
 {
     public BatteryRepository(MongoDbContext mongo)
-        :base(mongo.GetCollection<BatteryEntity>("batteries"))
+        : base(mongo.GetCollection<BatteryEntity>("batteries"))
     {
     }
 }

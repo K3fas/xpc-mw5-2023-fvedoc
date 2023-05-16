@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class OrderRepository : RepositoryBase<OrderEntity>, IOrderRepository
 {
     public OrderRepository(MockDb bogus)
-        :base(bogus.Orders)
+        : base(bogus.Orders)
     {
     }
 }

@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mock.Repositories;
 public class InverterRepository : RepositoryBase<InverterEntity>, IInverterRepository
 {
     public InverterRepository(MockDb bogus)
-        :base(bogus.Inverters)
+        : base(bogus.Inverters)
     {
     }
 }

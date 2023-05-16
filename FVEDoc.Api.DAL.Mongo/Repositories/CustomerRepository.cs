@@ -5,7 +5,7 @@ namespace FVEDoc.Api.DAL.Mongo.Repositories;
 public class CustomerRepository : RepositoryBase<CustomerEntity>, ICustomerRepository
 {
     public CustomerRepository(MongoDbContext mongo)
-        :base(mongo.GetCollection<CustomerEntity>("customers"))
+        : base(mongo.GetCollection<CustomerEntity>("customers"))
     {
     }
 }
