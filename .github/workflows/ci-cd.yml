@@ -3,7 +3,7 @@ name: CI FVEDoc
 on:
   push:
     branches:
-        - '*'
+        - '**'
     branches-ignore:
       - 'master'
 
