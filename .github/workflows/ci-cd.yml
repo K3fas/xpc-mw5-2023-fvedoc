@@ -20,22 +20,14 @@ jobs:
         run: dotnet restore
 
       - name: Build app
+        id: netbuild
         run: dotnet build -c Release --no-restore
         
-      - name: Create Check Run Build
-        id: create_check
-        uses: actions/github-script@v4
+      - name: Create Check
+        if: always()
+        uses: dflydev/check-runs-action@v1
         with:
-          script: |
-            const { data: checkRun } = await github.checks.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head_sha: context.sha,
-              name: 'Build Check',
-              status: 'completed',
-              conclusion: 'success',
-              output: {
-                title: 'Build Status',
-                summary: 'Build passed successfully!'
-            });
-            console.log(`Check Run created: ${checkRun.html_url}`);
+          token: ${{ secrets.GITHUB_TOKEN }}
+          id: netbuild
+          conclusion: ${{ steps.netbuild.outcome }}
+     
