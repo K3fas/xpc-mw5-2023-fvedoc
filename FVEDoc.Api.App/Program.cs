@@ -5,7 +5,7 @@ using FVEDoc.Api.DAL.Mock.Installers;
 using FVEDoc.Api.DAL.Mongo.Installers;
 using FVEDoc.Common.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-// Make the implicit Program class public so test projects can access it
+
 namespace FVEDoc.Api.App;
 public partial class Program
 {
@@ -115,4 +115,3 @@ public partial class Program
         }
     }
 }
-
