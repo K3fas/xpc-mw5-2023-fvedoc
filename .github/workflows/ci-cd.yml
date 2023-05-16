@@ -2,8 +2,8 @@ name: CI FVEDoc
 
 on:
   push:
-    branches-ignore:
-      - 'master'
+    branches:
+      - '**'
 
 jobs:
   build:
