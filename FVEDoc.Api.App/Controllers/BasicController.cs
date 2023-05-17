@@ -11,7 +11,7 @@ public abstract class BasicController<TEntity, TModel> : ControllerBase, IBasicC
     where TEntity : IEntity
     where TModel : IModelBase
 {
-    private readonly ILogger _logger;
+    protected readonly ILogger _logger;
     protected readonly IFacadeBase<TEntity, TModel> _facade;
 
     public BasicController(ILogger logger, IFacadeBase<TEntity, TModel> facade)
