@@ -12,6 +12,8 @@
     <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
     <PackageReference Include="Scrutor" Version="4.2.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.5.0" />
+
   </ItemGroup>
 
   <ItemGroup>

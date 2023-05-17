@@ -83,7 +83,7 @@ public partial class Program
 
         void ConfigureDependencies(IServiceCollection services, ConfigurationManager configuration)
         {
-            if (args[0] is not null && args[0] == "mock" ||
+            if (args.Any() && args[0] == "mock" ||
                 builder.Environment.IsEnvironment("IntegrationTesting"))
             {
                 services.AddInstaller<ApiDALMockInstaller>();

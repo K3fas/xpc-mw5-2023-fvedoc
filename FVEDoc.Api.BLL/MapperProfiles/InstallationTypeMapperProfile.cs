@@ -14,18 +14,18 @@ public class InstallationTypeMapperProfile : Profile
             .ForMember(dest => dest.CarCharger, src => src.Ignore());
 
         CreateMap<InstallationTypeModel, InstallationTypeEntity>()
-            .ForMember(dest => dest.Inverter, src => src.MapFrom(x => x.Inverter.Id))
-            .ForMember(dest => dest.PVPanel, src => src.MapFrom(x => x.PVPanel.Id))
-            .ForMember(dest => dest.Battery, src => src.MapFrom(x => x.Battery.Id))
-            .ForMember(dest => dest.CarCharger, src => src.MapFrom(x => x.CarCharger.Id))
+            .ForMember(dest => dest.Inverter, src => src.MapFrom(x => x.Inverter == null ? Guid.Empty : x.Inverter.Id))
+            .ForMember(dest => dest.PVPanel, src => src.MapFrom(x => x.PVPanel == null ? Guid.Empty : x.PVPanel.Id))
+            .ForMember(dest => dest.Battery, src => src.MapFrom(x => x.Battery == null ? Guid.Empty : x.Battery.Id))
+            .ForMember(dest => dest.CarCharger, src => src.MapFrom(x => x.CarCharger == null ? Guid.Empty : x.CarCharger.Id))
             .ForMember(dest => dest.DateCreated, src => src.Ignore())
             .ForMember(dest => dest.DateModified, src => src.Ignore());
 
-        CreateMap<InstallationTypeModel, InstallationTypeListModel>()
-            .ForMember(dest => dest.BatteryName, src => src.MapFrom(x => x.Battery == null ? null : x.Battery.Name))
-            .ForMember(dest => dest.CarChargerName, src => src.MapFrom(x => x.CarCharger == null ? null : x.CarCharger.Name))
-            .ForMember(dest => dest.InverterName, src => src.MapFrom(x => x.Inverter.Name))
-            .ForMember(dest => dest.PVPanelName, src => src.MapFrom(x => x.PVPanel.Name));
+        CreateMap<InstallationTypeEntity, InstallationTypeListModel>();
+            //.ForMember(dest => dest.BatteryName, src => src.MapFrom(x => x.Battery == null ? null : x.Battery.Name))
+            //.ForMember(dest => dest.CarChargerName, src => src.MapFrom(x => x.CarCharger == null ? null : x.CarCharger.Name))
+            //.ForMember(dest => dest.InverterName, src => src.MapFrom(x => x.Inverter.Name))
+            //.ForMember(dest => dest.PVPanelName, src => src.MapFrom(x => x.PVPanel.Name));
     }
 }
 

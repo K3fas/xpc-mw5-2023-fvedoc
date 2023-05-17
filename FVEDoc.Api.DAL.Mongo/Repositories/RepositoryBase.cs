@@ -41,6 +41,9 @@ public abstract class RepositoryBase<T> : IApiRepository<T> where T : class, IEn
 
     public virtual async Task<Guid> InsertAsync(T entity, CancellationToken c = default)
     {
+        if(await ExistsAsync(entity.Id, c))
+            return entity.Id;
+
         _collection.InsertOne(entity, cancellationToken: c);
         return entity.Id;
     }
